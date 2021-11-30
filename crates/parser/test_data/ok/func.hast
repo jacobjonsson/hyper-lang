@@ -1,0 +1,13 @@
+SourceFile@0..14
+  Func@0..14
+    Func@0..4 "func"
+    Whitespace@4..5 " "
+    Name@5..9
+      Identifier@5..9 "main"
+    ParamList@9..11
+      LeftParen@9..10 "("
+      RightParen@10..11 ")"
+    Whitespace@11..12 " "
+    FuncBody@12..14
+      LeftBrace@12..13 "{"
+      RightBrace@13..14 "}"
