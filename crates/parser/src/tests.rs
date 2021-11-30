@@ -2,7 +2,7 @@ use expect_test::expect_file;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-use crate::{parse, ParseError};
+use crate::{parse, SyntaxError};
 
 #[test]
 fn parse_smoke_test() {
@@ -21,10 +21,10 @@ fn parser_tests() {
     })
 }
 
-fn assert_errors_are_absent(errors: &[ParseError], path: &Path) {
+fn assert_errors_are_absent(errors: &[SyntaxError], path: &Path) {
     assert_eq!(
         errors,
-        &[] as &[ParseError],
+        &[] as &[SyntaxError],
         "There should be no errors in the file {:?}",
         path.display(),
     );

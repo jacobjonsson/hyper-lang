@@ -1,4 +1,4 @@
-use crate::ParseError;
+use crate::parser::ParseError;
 use crate::TreeSink;
 use std::mem;
 use syntax::SyntaxKind;

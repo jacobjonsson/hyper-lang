@@ -4,7 +4,7 @@ use super::{Parser, SyntaxKind};
 pub(super) fn param_list(parser: &mut Parser) {
     let marker = parser.start();
 
-    parser.bump(SyntaxKind::LeftParen);
+    parser.expect(SyntaxKind::LeftParen);
 
     while !parser.at(SyntaxKind::Eof) && parser.at(SyntaxKind::LeftParen) {
         param(parser);

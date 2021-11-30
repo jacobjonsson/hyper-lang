@@ -4,11 +4,14 @@ mod tests;
 mod event;
 mod grammar;
 mod parser;
+mod syntax_error;
+mod token_set;
 mod token_source;
 mod tree_sink;
 
 use rowan::GreenNode;
 use syntax::{SyntaxKind, SyntaxNode};
+use syntax_error::SyntaxError;
 use token_source::TokenSource;
 use tree_sink::TreeSink;
 
@@ -26,9 +29,6 @@ pub fn parse(source: &str) -> Parse {
     Parse::new(green, errors)
 }
 
-#[derive(Debug, PartialEq)]
-pub struct ParseError(pub String);
-
 /// `Token` abstracts the cursor of `TokenSource` operates on.
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub struct Token {
@@ -41,11 +41,11 @@ pub struct Token {
 
 pub struct Parse {
     green_node: GreenNode,
-    errors: Vec<ParseError>,
+    errors: Vec<SyntaxError>,
 }
 
 impl Parse {
-    pub fn new(green: GreenNode, errors: Vec<ParseError>) -> Self {
+    pub fn new(green: GreenNode, errors: Vec<SyntaxError>) -> Self {
         Self {
             green_node: green,
             errors,
@@ -57,10 +57,14 @@ impl Parse {
     }
 
     pub fn debug_tree(&self) -> String {
-        format!("{:#?}", self.syntax())
+        let mut buf = format!("{:#?}", self.syntax());
+        for error in &self.errors {
+            buf.push_str(&format!("error: {:?}: {}\n", error.range(), error));
+        }
+        buf
     }
 
-    pub fn errors(&self) -> &[ParseError] {
+    pub fn errors(&self) -> &[SyntaxError] {
         &self.errors
     }
 
@@ -68,7 +72,7 @@ impl Parse {
         &self.green_node
     }
 
-    pub fn ok(self) -> Result<SyntaxNode, Vec<ParseError>> {
+    pub fn ok(self) -> Result<SyntaxNode, Vec<SyntaxError>> {
         if self.errors.is_empty() {
             Ok(self.syntax())
         } else {

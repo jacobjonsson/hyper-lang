@@ -1,11 +1,16 @@
 mod marker;
 
-use crate::{event::Event, token_source::TokenSource, ParseError};
+use crate::event::Event;
+use crate::token_set::TokenSet;
+use crate::token_source::TokenSource;
 use std::cell::Cell;
 use syntax::SyntaxKind;
 
 pub(crate) use self::marker::CompletedMarker;
 pub(crate) use self::marker::Marker;
+
+#[derive(Debug, PartialEq)]
+pub(crate) struct ParseError(pub String);
 
 pub(crate) struct Parser {
     token_source: TokenSource,
@@ -96,8 +101,8 @@ impl Parser {
     }
 
     /// Checks if the current token is in `kinds`.
-    pub(crate) fn at_ts(&self, kinds: &[SyntaxKind]) -> bool {
-        kinds.contains(&self.current())
+    pub(crate) fn at_ts(&self, kinds: TokenSet) -> bool {
+        kinds.contains(self.current())
     }
 
     /// Consume the next token if `kind` matches.
@@ -135,11 +140,11 @@ impl Parser {
 
     /// Create an error node and consume the next token.
     pub(crate) fn err_and_bump(&mut self, message: &str) {
-        self.err_recover(message, Default::default());
+        self.err_recover(message, TokenSet::EMPTY);
     }
 
     /// Create an error node and consume the next token.
-    pub(crate) fn err_recover(&mut self, message: &str, recovery: &[SyntaxKind]) {
+    pub(crate) fn err_recover(&mut self, message: &str, recovery: TokenSet) {
         if self.at_ts(recovery) {
             self.error(message);
             return;

@@ -75,15 +75,15 @@ impl CompletedMarker {
     /// then mark `NEWSTART` as `START`'s parent with saving its relative
     /// distance to `NEWSTART` into forward_parent(=2 in this case);
     pub(crate) fn precede(self, parser: &mut Parser) -> Marker {
-        let new_pos = parser.start();
+        let new_marker = parser.start();
         let idx = self.pos as usize;
         match &mut parser.events[idx] {
             Event::Start { forward_parent, .. } => {
-                *forward_parent = Some(new_pos.pos - self.pos);
+                *forward_parent = Some(new_marker.pos - self.pos);
             }
             _ => unreachable!(),
         }
-        new_pos
+        new_marker
     }
 
     /// Extends this completed marker *to the left* up to `m`.

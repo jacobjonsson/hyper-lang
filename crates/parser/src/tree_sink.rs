@@ -1,4 +1,5 @@
-use crate::ParseError;
+use crate::parser::ParseError;
+use crate::SyntaxError;
 use lexer::Token;
 use rowan::{GreenNode, GreenNodeBuilder, Language};
 use std::mem;
@@ -17,7 +18,7 @@ pub struct TreeSink<'a> {
     text_pos: TextSize,
     token_pos: usize,
     state: State,
-    errors: Vec<ParseError>,
+    errors: Vec<SyntaxError>,
     builder: GreenNodeBuilder<'static>,
 }
 
@@ -73,7 +74,7 @@ impl<'a> TreeSink<'a> {
         }
     }
 
-    pub(crate) fn finish(mut self) -> (GreenNode, Vec<ParseError>) {
+    pub(crate) fn finish(mut self) -> (GreenNode, Vec<SyntaxError>) {
         match mem::replace(&mut self.state, State::PendingFinish) {
             State::PendingFinish => {
                 self.builder.finish_node();
@@ -85,7 +86,8 @@ impl<'a> TreeSink<'a> {
     }
 
     pub(crate) fn error(&mut self, error: ParseError) {
-        self.errors.push(error);
+        self.errors
+            .push(SyntaxError::new_at_offset(error.0, self.text_pos));
     }
 
     fn eat_trivias(&mut self) {
