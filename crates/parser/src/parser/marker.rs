@@ -99,6 +99,7 @@ impl CompletedMarker {
         self
     }
 
+    #[allow(dead_code)]
     pub(crate) fn kind(&self) -> SyntaxKind {
         self.kind
     }

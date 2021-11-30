@@ -1,14 +1,13 @@
 use syntax::SyntaxKind;
-use text_size::{TextRange, TextSize};
+use text_size::TextSize;
 
-pub struct TokenSource<'a> {
-    text: &'a str,
+pub struct TokenSource {
     token_offset_pairs: Vec<(lexer::Token, TextSize)>,
     current: (crate::Token, usize),
 }
 
-impl<'a> TokenSource<'a> {
-    pub(crate) fn new(text: &'a str, raw_tokens: &'a [lexer::Token]) -> Self {
+impl TokenSource {
+    pub(crate) fn new(raw_tokens: &[lexer::Token]) -> Self {
         let token_offset_pairs: Vec<_> = raw_tokens
             .iter()
             .filter_map({
@@ -27,7 +26,6 @@ impl<'a> TokenSource<'a> {
 
         let first = mk_token(0, &token_offset_pairs);
         TokenSource {
-            text,
             token_offset_pairs,
             current: (first, 0),
         }

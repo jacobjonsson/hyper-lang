@@ -1,21 +1,20 @@
 mod marker;
 
 use crate::{event::Event, token_source::TokenSource, ParseError};
-use std::ascii::AsciiExt;
 use std::cell::Cell;
 use syntax::SyntaxKind;
 
 pub(crate) use self::marker::CompletedMarker;
 pub(crate) use self::marker::Marker;
 
-pub(crate) struct Parser<'a> {
-    token_source: TokenSource<'a>,
+pub(crate) struct Parser {
+    token_source: TokenSource,
     events: Vec<Event>,
     steps: Cell<u32>,
 }
 
-impl<'a> Parser<'a> {
-    pub fn new(token_source: TokenSource<'a>) -> Parser<'a> {
+impl Parser {
+    pub fn new(token_source: TokenSource) -> Parser {
         Parser {
             token_source,
             events: Vec::new(),
@@ -72,6 +71,7 @@ impl<'a> Parser<'a> {
         true
     }
 
+    #[allow(dead_code)]
     fn at_composite2(&self, n: usize, k1: SyntaxKind, k2: SyntaxKind) -> bool {
         let t1 = self.token_source.lookahead_nth(n);
         if t1.kind != k1 || !t1.is_jointed_to_next {
@@ -81,6 +81,7 @@ impl<'a> Parser<'a> {
         t2.kind == k2
     }
 
+    #[allow(dead_code)]
     fn at_composite3(&self, n: usize, k1: SyntaxKind, k2: SyntaxKind, k3: SyntaxKind) -> bool {
         let t1 = self.token_source.lookahead_nth(n);
         if t1.kind != k1 || !t1.is_jointed_to_next {

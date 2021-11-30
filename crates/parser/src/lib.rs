@@ -16,7 +16,7 @@ use crate::parser::Parser;
 
 pub fn parse(source: &str) -> Parse {
     let raw_tokens = lexer::tokenize(source);
-    let token_source = TokenSource::new(source, &raw_tokens);
+    let token_source = TokenSource::new(&raw_tokens);
     let mut parser = Parser::new(token_source);
     grammar::source_file(&mut parser);
     let events = parser.finish();

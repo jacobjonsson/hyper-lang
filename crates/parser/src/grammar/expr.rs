@@ -1,4 +1,3 @@
-use crate::grammar::name_ref;
 use crate::parser::CompletedMarker;
 use crate::parser::Parser;
 use syntax::SyntaxKind;

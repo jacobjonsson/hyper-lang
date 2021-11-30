@@ -19,6 +19,6 @@ pub(super) fn param_list(parser: &mut Parser) {
     marker.complete(parser, SyntaxKind::ParamList);
 }
 
-pub(super) fn param(parser: &mut Parser) {
+pub(super) fn param(_parser: &mut Parser) {
     todo!()
 }

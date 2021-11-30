@@ -25,6 +25,7 @@ pub(super) fn name(parser: &mut Parser) {
     marker.complete(parser, SyntaxKind::Name);
 }
 
+#[allow(dead_code)]
 pub(super) fn name_ref(parser: &mut Parser) {
     if !parser.at(SyntaxKind::Identifier) {
         parser.error("expected an identifier");
