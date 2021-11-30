@@ -49,14 +49,6 @@ impl<'a> TokenSource<'a> {
         let pos = self.current.1 + 1;
         self.current = (mk_token(pos, &self.token_offset_pairs), pos);
     }
-
-    pub(crate) fn is_keyword(&self, kw: &str) -> bool {
-        self.token_offset_pairs
-            .get(self.current.1)
-            .map_or(false, |(token, offset)| {
-                &self.text[TextRange::at(*offset, token.len)] == kw
-            })
-    }
 }
 
 fn mk_token(pos: usize, token_offset_pairs: &[(lexer::Token, TextSize)]) -> crate::Token {

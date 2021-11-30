@@ -40,6 +40,7 @@ impl<'a> Cursor<'a> {
             '}' => SyntaxKind::RightBrace,
             '[' => SyntaxKind::LeftBracket,
             ']' => SyntaxKind::RightBracket,
+            '%' => SyntaxKind::Percent,
             '+' => SyntaxKind::Plus,
             '-' => SyntaxKind::Minus,
             '*' => SyntaxKind::Star,
@@ -49,6 +50,7 @@ impl<'a> Cursor<'a> {
             ',' => SyntaxKind::Comma,
             '<' => SyntaxKind::LessThan,
             '>' => SyntaxKind::GreaterThan,
+            '!' => SyntaxKind::Bang,
             '/' => {
                 if self.first() == '/' {
                     self.bump();
@@ -134,6 +136,9 @@ impl<'a> Cursor<'a> {
             "let" => SyntaxKind::Let,
             "mut" => SyntaxKind::Mut,
             "state" => SyntaxKind::State,
+            "return" => SyntaxKind::Return,
+            "true" => SyntaxKind::True,
+            "false" => SyntaxKind::False,
             _ => SyntaxKind::Identifier,
         }
     }

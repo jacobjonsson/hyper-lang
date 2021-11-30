@@ -8,6 +8,5 @@ SourceFile@0..14
       LeftParen@9..10 "("
       RightParen@10..11 ")"
     Whitespace@11..12 " "
-    FuncBody@12..14
-      LeftBrace@12..13 "{"
-      RightBrace@13..14 "}"
+    LeftBrace@12..13 "{"
+    RightBrace@13..14 "}"

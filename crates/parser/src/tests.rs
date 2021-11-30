@@ -70,7 +70,11 @@ fn collect_hyper_files(root_dir: &Path, paths: &[&str]) -> Vec<(PathBuf, String)
         .iter()
         .flat_map(|path| {
             let path = root_dir.to_owned().join(path);
-            hyper_files_in_dir(&path).into_iter()
+            hyper_files_in_dir(&path).into_iter().filter(|path| {
+                path.to_str()
+                    .map(|str| str.contains("0005"))
+                    .unwrap_or(false)
+            })
         })
         .map(|path| {
             let text = fs::read_to_string(&path).expect("Could not read hyper file");
@@ -81,8 +85,6 @@ fn collect_hyper_files(root_dir: &Path, paths: &[&str]) -> Vec<(PathBuf, String)
 
 /// Collects paths to all `.rs` files from `dir` in a sorted `Vec<PathBuf>`.
 fn hyper_files_in_dir(dir: &Path) -> Vec<PathBuf> {
-    println!("{:?}", dir);
-
     let mut acc = Vec::new();
     for file in fs::read_dir(&dir).unwrap() {
         let file = file.unwrap();

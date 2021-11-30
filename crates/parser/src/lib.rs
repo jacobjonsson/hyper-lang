@@ -7,8 +7,6 @@ mod parser;
 mod token_source;
 mod tree_sink;
 
-use std::sync::Arc;
-
 use rowan::GreenNode;
 use syntax::{SyntaxKind, SyntaxNode};
 use token_source::TokenSource;

@@ -1,9 +1,11 @@
 mod marker;
 
 use crate::{event::Event, token_source::TokenSource, ParseError};
+use std::ascii::AsciiExt;
 use std::cell::Cell;
 use syntax::SyntaxKind;
 
+pub(crate) use self::marker::CompletedMarker;
 pub(crate) use self::marker::Marker;
 
 pub(crate) struct Parser<'a> {

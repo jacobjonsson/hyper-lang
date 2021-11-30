@@ -1,0 +1,22 @@
+SourceFile@0..30
+  Func@0..30
+    Func@0..4 "func"
+    Whitespace@4..5 " "
+    Name@5..9
+      Identifier@5..9 "main"
+    ParamList@9..11
+      LeftParen@9..10 "("
+      RightParen@10..11 ")"
+    Whitespace@11..12 " "
+    LeftBrace@12..13 "{"
+    Whitespace@13..18 "\n    "
+    ReturnStmt@18..28
+      Return@18..24 "return"
+      Whitespace@24..25 " "
+      UnaryExpr@25..27
+        Bang@25..26 "!"
+        NameRef@26..27
+          Identifier@26..27 "a"
+      Semicolon@27..28 ";"
+    Whitespace@28..29 "\n"
+    RightBrace@29..30 "}"

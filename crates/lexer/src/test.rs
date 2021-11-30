@@ -18,6 +18,8 @@ test_token!(single_line_comment, "// abc", "Comment@6");
 test_token!(string, "\"hello\"", "String@7");
 test_token!(identifier, "hello", "Identifier@5");
 test_token!(integer, "123", "Integer@3");
+test_token!(r#true, "true", "True@4");
+test_token!(r#false, "false", "False@5");
 
 test_token!(left_paren, "(", "LeftParen@1");
 test_token!(right_paren, ")", "RightParen@1");
@@ -35,12 +37,15 @@ test_token!(dot, ".", "Dot@1");
 test_token!(equals, "=", "Equals@1");
 test_token!(less_than, "<", "LessThan@1");
 test_token!(greater_than, ">", "GreaterThan@1");
+test_token!(percent, "%", "Percent@1");
+test_token!(bang, "!", "Bang@1");
 
 test_token!(func, "func", "Func@4");
 test_token!(view, "view", "View@4");
 test_token!(r#let, "let", "Let@3");
 test_token!(r#mut, "mut", "Mut@3");
 test_token!(state, "state", "State@5");
+test_token!(r#return, "return", "Return@6");
 
 #[test]
 fn smoke_test() {

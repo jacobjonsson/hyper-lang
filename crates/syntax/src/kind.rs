@@ -14,6 +14,8 @@ pub enum SyntaxKind {
     String,
     Identifier,
     Integer,
+    True,
+    False,
 
     LeftParen,
     RightParen,
@@ -25,18 +27,21 @@ pub enum SyntaxKind {
     Minus,
     Star,
     Slash,
+    Percent,
     Semicolon,
     Comma,
     Dot,
     Equals,
     LessThan,
     GreaterThan,
+    Bang,
 
     Func,
     View,
     Let,
     Mut,
     State,
+    Return,
 
     // Nodes
     SourceFile,
@@ -46,6 +51,10 @@ pub enum SyntaxKind {
     Param,
     FuncBody,
     ViewBody,
+    ReturnStmt,
+    Literal,
+    BinaryExpr,
+    UnaryExpr,
 
     #[doc(hidden)]
     __LAST,

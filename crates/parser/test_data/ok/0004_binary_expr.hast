@@ -1,0 +1,38 @@
+SourceFile@0..41
+  Func@0..41
+    Func@0..4 "func"
+    Whitespace@4..5 " "
+    Name@5..9
+      Identifier@5..9 "main"
+    ParamList@9..11
+      LeftParen@9..10 "("
+      RightParen@10..11 ")"
+    Whitespace@11..12 " "
+    LeftBrace@12..13 "{"
+    Whitespace@13..18 "\n    "
+    ReturnStmt@18..39
+      Return@18..24 "return"
+      Whitespace@24..25 " "
+      BinaryExpr@25..38
+        Literal@25..26
+          Integer@25..26 "1"
+        Whitespace@26..27 " "
+        Plus@27..28 "+"
+        Whitespace@28..29 " "
+        BinaryExpr@29..38
+          BinaryExpr@29..34
+            Literal@29..30
+              Integer@29..30 "2"
+            Whitespace@30..31 " "
+            Star@31..32 "*"
+            Whitespace@32..33 " "
+            Literal@33..34
+              Integer@33..34 "3"
+          Whitespace@34..35 " "
+          Slash@35..36 "/"
+          Whitespace@36..37 " "
+          Literal@37..38
+            Integer@37..38 "4"
+      Semicolon@38..39 ";"
+    Whitespace@39..40 "\n"
+    RightBrace@40..41 "}"
