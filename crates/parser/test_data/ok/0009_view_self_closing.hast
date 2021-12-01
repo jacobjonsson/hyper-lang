@@ -1,0 +1,26 @@
+SourceFile@0..34
+  View@0..34
+    View@0..4 "view"
+    Whitespace@4..5 " "
+    Name@5..8
+      Identifier@5..8 "app"
+    ParamList@8..10
+      LeftParen@8..9 "("
+      RightParen@9..10 ")"
+    Whitespace@10..11 " "
+    LeftBrace@11..12 "{"
+    Whitespace@12..17 "\n    "
+    ReturnStmt@17..32
+      Return@17..23 "return"
+      Whitespace@23..24 " "
+      XmlSelfClosingElement@24..31
+        LessThan@24..25 "<"
+        NameRef@25..28
+          Identifier@25..28 "div"
+        Whitespace@28..29 " "
+        XmlAttributeList@29..29
+        Slash@29..30 "/"
+        GreaterThan@30..31 ">"
+      Semicolon@31..32 ";"
+    Whitespace@32..33 "\n"
+    RightBrace@33..34 "}"

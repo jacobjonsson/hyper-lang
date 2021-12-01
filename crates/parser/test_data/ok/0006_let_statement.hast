@@ -1,0 +1,32 @@
+SourceFile@0..42
+  Func@0..42
+    Func@0..4 "func"
+    Whitespace@4..5 " "
+    Name@5..9
+      Identifier@5..9 "main"
+    ParamList@9..11
+      LeftParen@9..10 "("
+      RightParen@10..11 ")"
+    Whitespace@11..12 " "
+    LeftBrace@12..13 "{"
+    Whitespace@13..18 "\n    "
+    LetStmt@18..24
+      Let@18..21 "let"
+      Whitespace@21..22 " "
+      Name@22..23
+        Identifier@22..23 "a"
+      Semicolon@23..24 ";"
+    Whitespace@24..29 "\n    "
+    LetStmt@29..40
+      Let@29..32 "let"
+      Whitespace@32..33 " "
+      Name@33..34
+        Identifier@33..34 "b"
+      Whitespace@34..35 " "
+      Equals@35..36 "="
+      Whitespace@36..37 " "
+      Literal@37..39
+        Integer@37..39 "10"
+      Semicolon@39..40 ";"
+    Whitespace@40..41 "\n"
+    RightBrace@41..42 "}"

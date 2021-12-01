@@ -2,6 +2,7 @@ mod expr;
 mod func;
 mod item;
 mod param;
+mod stmt;
 mod view;
 
 use syntax::SyntaxKind;

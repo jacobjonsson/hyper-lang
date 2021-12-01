@@ -55,6 +55,14 @@ pub enum SyntaxKind {
     Literal,
     BinaryExpr,
     UnaryExpr,
+    LetStmt,
+    StateStmt,
+    XmlElement,
+    XmlSelfClosingElement,
+    XmlOpeningElement,
+    XmlClosingElement,
+    XmlAttributeList,
+    XmlAttribute,
 
     #[doc(hidden)]
     __LAST,

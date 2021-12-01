@@ -1,5 +1,8 @@
-use super::name;
+use super::expr::expr;
+use super::name_ref;
 use super::param::param_list;
+use super::stmt::state_stmt;
+use super::{name, stmt::let_stmt};
 use crate::parser::{Marker, Parser};
 use syntax::SyntaxKind;
 
@@ -42,23 +45,68 @@ fn view_body_stmt(parser: &mut Parser) {
     let marker = parser.start();
 
     if parser.at(SyntaxKind::Let) {
-        parser.err_and_bump("let statements are not yet supported");
-        marker.abandon(parser);
+        let_stmt(parser, marker);
         return;
     }
 
     if parser.at(SyntaxKind::State) {
-        parser.err_and_bump("state statements are not yet supported");
-        marker.abandon(parser);
+        state_stmt(parser, marker);
         return;
     }
 
     if parser.at(SyntaxKind::Return) {
-        parser.err_and_bump("return statements are not yet supported");
-        marker.abandon(parser);
+        view_return_stmt(parser, marker);
         return;
     }
 
     parser.err_and_bump("expected a valid view body stmt");
     marker.abandon(parser);
+}
+
+fn view_return_stmt(parser: &mut Parser, marker: Marker) {
+    parser.bump(SyntaxKind::Return);
+
+    xml(parser);
+
+    if parser.at(SyntaxKind::Semicolon) {
+        parser.bump(SyntaxKind::Semicolon);
+    }
+
+    marker.complete(parser, SyntaxKind::ReturnStmt);
+}
+
+fn xml(parser: &mut Parser) {
+    let marker = parser.start();
+
+    parser.expect(SyntaxKind::LessThan);
+    name_ref(parser);
+
+    xml_attribute_list(parser);
+
+    parser.expect(SyntaxKind::Slash);
+    parser.expect(SyntaxKind::GreaterThan);
+
+    marker.complete(parser, SyntaxKind::XmlSelfClosingElement);
+}
+
+fn xml_attribute_list(parser: &mut Parser) {
+    let marker = parser.start();
+
+    while !parser.at(SyntaxKind::Slash) && !parser.at(SyntaxKind::GreaterThan) {
+        xml_attribute(parser);
+    }
+
+    marker.complete(parser, SyntaxKind::XmlAttributeList);
+}
+
+fn xml_attribute(parser: &mut Parser) {
+    let marker = parser.start();
+
+    name_ref(parser);
+    parser.expect(SyntaxKind::Equals);
+    parser.expect(SyntaxKind::LeftBrace);
+    expr(parser);
+    parser.expect(SyntaxKind::RightBrace);
+
+    marker.complete(parser, SyntaxKind::XmlAttribute);
 }

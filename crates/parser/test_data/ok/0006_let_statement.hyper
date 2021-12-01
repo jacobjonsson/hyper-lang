@@ -1,0 +1,4 @@
+func main() {
+    let a;
+    let b = 10;
+}

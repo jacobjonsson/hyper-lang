@@ -70,11 +70,7 @@ fn collect_hyper_files(root_dir: &Path, paths: &[&str]) -> Vec<(PathBuf, String)
         .iter()
         .flat_map(|path| {
             let path = root_dir.to_owned().join(path);
-            hyper_files_in_dir(&path).into_iter().filter(|path| {
-                path.to_str()
-                    .map(|str| str.contains("0005"))
-                    .unwrap_or(false)
-            })
+            hyper_files_in_dir(&path).into_iter()
         })
         .map(|path| {
             let text = fs::read_to_string(&path).expect("Could not read hyper file");
@@ -89,6 +85,11 @@ fn hyper_files_in_dir(dir: &Path) -> Vec<PathBuf> {
     for file in fs::read_dir(&dir).unwrap() {
         let file = file.unwrap();
         let path = file.path();
+
+        if path.to_str().unwrap_or_default().contains(".skip") {
+            continue;
+        }
+
         if path.extension().unwrap_or_default() == "hyper" {
             acc.push(path);
         }

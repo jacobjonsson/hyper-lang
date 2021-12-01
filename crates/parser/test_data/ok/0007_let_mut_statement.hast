@@ -1,0 +1,27 @@
+SourceFile@0..38
+  Func@0..38
+    Func@0..4 "func"
+    Whitespace@4..5 " "
+    Name@5..9
+      Identifier@5..9 "main"
+    ParamList@9..11
+      LeftParen@9..10 "("
+      RightParen@10..11 ")"
+    Whitespace@11..12 " "
+    LeftBrace@12..13 "{"
+    Whitespace@13..18 "\n    "
+    LetStmt@18..36
+      Let@18..21 "let"
+      Whitespace@21..22 " "
+      Mut@22..25 "mut"
+      Whitespace@25..26 " "
+      Name@26..27
+        Identifier@26..27 "a"
+      Whitespace@27..28 " "
+      Equals@28..29 "="
+      Whitespace@29..30 " "
+      Literal@30..35
+        String@30..35 "\"abc\""
+      Semicolon@35..36 ";"
+    Whitespace@36..37 "\n"
+    RightBrace@37..38 "}"

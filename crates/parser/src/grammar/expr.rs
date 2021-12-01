@@ -61,7 +61,6 @@ fn lhs(parser: &mut Parser) -> Option<CompletedMarker> {
         return Some(m);
     }
 
-    println!("Before UNARY FIRST: {:?}", parser.current());
     if parser.at_ts(UNARY_FIRST) {
         let marker = parser.start();
         parser.bump_any();

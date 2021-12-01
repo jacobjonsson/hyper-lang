@@ -1,4 +1,5 @@
 use super::param::param_list;
+use super::stmt::let_stmt;
 use super::{expr::expr, name};
 use crate::parser::{Marker, Parser};
 use syntax::SyntaxKind;
@@ -42,8 +43,7 @@ fn func_body_stmt(parser: &mut Parser) {
     let marker = parser.start();
 
     if parser.at(SyntaxKind::Let) {
-        parser.err_and_bump("let statements are not yet supported");
-        marker.abandon(parser);
+        let_stmt(parser, marker);
         return;
     }
 
