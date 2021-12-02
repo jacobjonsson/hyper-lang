@@ -8,11 +8,7 @@ pub(crate) struct Cursor<'a> {
 
 impl<'a> Cursor<'a> {
     pub fn new(source: &'a str) -> Cursor<'a> {
-        Cursor {
-            source,
-            initial_len: source.len(),
-            chars: source.chars(),
-        }
+        Cursor { source, initial_len: source.len(), chars: source.chars() }
     }
 
     /// Returns nth character relative to the current cursor position.

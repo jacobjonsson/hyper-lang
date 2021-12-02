@@ -1,0 +1,62 @@
+SourceFile@0..133
+  View@0..94
+    View@0..4 "view"
+    Whitespace@4..5 " "
+    Name@5..11
+      Identifier@5..11 "Button"
+    ParamList@11..13
+      LeftParen@11..12 "("
+      RightParen@12..13 ")"
+    Whitespace@13..14 " "
+    LeftBrace@14..15 "{"
+    Whitespace@15..20 "\n    "
+    ReturnStmt@20..92
+      Return@20..26 "return"
+      Whitespace@26..27 " "
+      LeftParen@27..28 "("
+      Whitespace@28..37 "\n        "
+      XmlElement@37..85
+        LessThan@37..38 "<"
+        NameRef@38..44
+          Identifier@38..44 "button"
+        XmlAttributeList@44..44
+        GreaterThan@44..45 ">"
+        Whitespace@45..58 "\n            "
+        Identifier@58..60 "my"
+        Whitespace@60..61 " "
+        Identifier@61..67 "button"
+        Whitespace@67..76 "\n        "
+        LessThanSlash@76..78 "</"
+        NameRef@78..84
+          Identifier@78..84 "button"
+        GreaterThan@84..85 ">"
+      Whitespace@85..90 "\n    "
+      RightParen@90..91 ")"
+      Semicolon@91..92 ";"
+    Whitespace@92..93 "\n"
+    RightBrace@93..94 "}"
+  Whitespace@94..96 "\n\n"
+  View@96..133
+    View@96..100 "view"
+    Whitespace@100..101 " "
+    Name@101..104
+      Identifier@101..104 "App"
+    ParamList@104..106
+      LeftParen@104..105 "("
+      RightParen@105..106 ")"
+    Whitespace@106..107 " "
+    LeftBrace@107..108 "{"
+    Whitespace@108..113 "\n    "
+    ReturnStmt@113..131
+      Return@113..119 "return"
+      Whitespace@119..120 " "
+      XmlElement@120..130
+        LessThan@120..121 "<"
+        NameRef@121..127
+          Identifier@121..127 "Button"
+        Whitespace@127..128 " "
+        XmlAttributeList@128..128
+        SlashGreaterThan@128..130 "/>"
+      Semicolon@130..131 ";"
+    Whitespace@131..132 "\n"
+    RightBrace@132..133 "}"

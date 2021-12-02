@@ -22,12 +22,7 @@ fn parser_tests() {
 }
 
 fn assert_errors_are_absent(errors: &[SyntaxError], path: &Path) {
-    assert_eq!(
-        errors,
-        &[] as &[SyntaxError],
-        "There should be no errors in the file {:?}",
-        path.display(),
-    );
+    assert_eq!(errors, &[] as &[SyntaxError], "There should be no errors in the file {:?}", path.display(),);
 }
 
 fn test_data_dir() -> PathBuf {
@@ -37,12 +32,7 @@ fn test_data_dir() -> PathBuf {
 /// Returns the path to the root directory of `hyper-lang` project.
 pub fn project_root() -> PathBuf {
     let dir = env!("CARGO_MANIFEST_DIR");
-    PathBuf::from(dir)
-        .parent()
-        .unwrap()
-        .parent()
-        .unwrap()
-        .to_owned()
+    PathBuf::from(dir).parent().unwrap().parent().unwrap().to_owned()
 }
 
 /// Calls callback `f` with input code and file paths for each `.rs` file in `test_data_dir`

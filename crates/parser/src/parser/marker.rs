@@ -12,10 +12,7 @@ pub(crate) struct Marker {
 
 impl Marker {
     pub(crate) fn new(pos: u32) -> Marker {
-        Marker {
-            pos,
-            bomb: DropBomb::new("Marker must be either completed or abandoned"),
-        }
+        Marker { pos, bomb: DropBomb::new("Marker must be either completed or abandoned") }
     }
 
     /// Finishes the syntax tree node and assigns `kind` to it,
@@ -41,10 +38,7 @@ impl Marker {
         let idx = self.pos as usize;
         if idx == parser.events.len() - 1 {
             match parser.events.pop() {
-                Some(Event::Start {
-                    kind: SyntaxKind::Tombstone,
-                    forward_parent: None,
-                }) => (),
+                Some(Event::Start { kind: SyntaxKind::Tombstone, forward_parent: None }) => (),
                 _ => unreachable!(),
             }
         }

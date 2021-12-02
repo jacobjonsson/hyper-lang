@@ -1,0 +1,11 @@
+view Button() {
+    return (
+        <button>
+            my button
+        </button>
+    );
+}
+
+view App() {
+    return <Button />;
+}

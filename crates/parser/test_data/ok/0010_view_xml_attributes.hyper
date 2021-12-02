@@ -1,3 +1,0 @@
-view app() {
-    return <div count={123} />
-}

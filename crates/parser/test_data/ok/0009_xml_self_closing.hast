@@ -13,14 +13,13 @@ SourceFile@0..34
     ReturnStmt@17..32
       Return@17..23 "return"
       Whitespace@23..24 " "
-      XmlSelfClosingElement@24..31
+      XmlElement@24..31
         LessThan@24..25 "<"
         NameRef@25..28
           Identifier@25..28 "div"
         Whitespace@28..29 " "
         XmlAttributeList@29..29
-        Slash@29..30 "/"
-        GreaterThan@30..31 ">"
+        SlashGreaterThan@29..31 "/>"
       Semicolon@31..32 ";"
     Whitespace@32..33 "\n"
     RightBrace@33..34 "}"

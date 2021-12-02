@@ -52,8 +52,7 @@ fn expr_bp(parser: &mut Parser, bp: u8) {
     }
 }
 
-pub(crate) const UNARY_FIRST: TokenSet =
-    TokenSet::new(&[SyntaxKind::Bang, SyntaxKind::Plus, SyntaxKind::Minus]);
+pub(crate) const UNARY_FIRST: TokenSet = TokenSet::new(&[SyntaxKind::Bang, SyntaxKind::Plus, SyntaxKind::Minus]);
 
 /// Parses the left hand side of an expression
 fn lhs(parser: &mut Parser) -> Option<CompletedMarker> {
@@ -81,12 +80,8 @@ fn lhs(parser: &mut Parser) -> Option<CompletedMarker> {
     Some(done)
 }
 
-pub(crate) const LITERAL_FIRST: TokenSet = TokenSet::new(&[
-    SyntaxKind::True,
-    SyntaxKind::False,
-    SyntaxKind::String,
-    SyntaxKind::Integer,
-]);
+pub(crate) const LITERAL_FIRST: TokenSet =
+    TokenSet::new(&[SyntaxKind::True, SyntaxKind::False, SyntaxKind::String, SyntaxKind::Integer]);
 
 pub(super) fn literal(parser: &mut Parser) -> Option<CompletedMarker> {
     if !parser.at_ts(LITERAL_FIRST) {

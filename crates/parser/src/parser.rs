@@ -12,19 +12,15 @@ pub(crate) use self::marker::Marker;
 #[derive(Debug, PartialEq)]
 pub(crate) struct ParseError(pub String);
 
-pub(crate) struct Parser {
-    token_source: TokenSource,
+pub(crate) struct Parser<'a> {
+    token_source: TokenSource<'a>,
     events: Vec<Event>,
     steps: Cell<u32>,
 }
 
-impl Parser {
-    pub fn new(token_source: TokenSource) -> Parser {
-        Parser {
-            token_source,
-            events: Vec::new(),
-            steps: Cell::new(0),
-        }
+impl<'a> Parser<'a> {
+    pub fn new(token_source: TokenSource<'a>) -> Parser {
+        Parser { token_source, events: Vec::new(), steps: Cell::new(0) }
     }
 
     pub(crate) fn start(&mut self) -> Marker {
@@ -60,6 +56,15 @@ impl Parser {
 
     pub(crate) fn nth_at(&self, n: usize, kind: SyntaxKind) -> bool {
         match kind {
+            SyntaxKind::SlashGreaterThan => self.at_composite2(n, SyntaxKind::Slash, SyntaxKind::GreaterThan),
+            SyntaxKind::LessThanSlash => self.at_composite2(n, SyntaxKind::LessThan, SyntaxKind::Slash),
+            SyntaxKind::PlusEquals => self.at_composite2(n, SyntaxKind::Plus, SyntaxKind::Equals),
+            SyntaxKind::MinusEquals => self.at_composite2(n, SyntaxKind::Minus, SyntaxKind::Equals),
+            SyntaxKind::SlashEquals => self.at_composite2(n, SyntaxKind::Slash, SyntaxKind::Equals),
+            SyntaxKind::StarEquals => self.at_composite2(n, SyntaxKind::Star, SyntaxKind::Equals),
+            SyntaxKind::EqualsEquals => self.at_composite2(n, SyntaxKind::Equals, SyntaxKind::Equals),
+            SyntaxKind::BangEquals => self.at_composite2(n, SyntaxKind::Bang, SyntaxKind::Equals),
+
             _ => self.token_source.lookahead_nth(n).kind == kind,
         }
     }
@@ -70,6 +75,14 @@ impl Parser {
             return false;
         }
         let n_raw_tokens = match kind {
+            SyntaxKind::SlashGreaterThan
+            | SyntaxKind::LessThanSlash
+            | SyntaxKind::PlusEquals
+            | SyntaxKind::MinusEquals
+            | SyntaxKind::SlashEquals
+            | SyntaxKind::StarEquals
+            | SyntaxKind::EqualsEquals
+            | SyntaxKind::BangEquals => 2,
             _ => 1,
         };
         self.do_bump(kind, n_raw_tokens);
@@ -82,6 +95,7 @@ impl Parser {
         if t1.kind != k1 || !t1.is_jointed_to_next {
             return false;
         }
+
         let t2 = self.token_source.lookahead_nth(n + 1);
         t2.kind == k2
     }
@@ -92,10 +106,12 @@ impl Parser {
         if t1.kind != k1 || !t1.is_jointed_to_next {
             return false;
         }
+
         let t2 = self.token_source.lookahead_nth(n + 1);
         if t2.kind != k2 || !t2.is_jointed_to_next {
             return false;
         }
+
         let t3 = self.token_source.lookahead_nth(n + 2);
         t3.kind == k3
     }
@@ -166,5 +182,13 @@ impl Parser {
 
     pub(crate) fn push_event(&mut self, event: Event) {
         self.events.push(event);
+    }
+
+    pub(crate) fn text(&self) -> Option<&'a str> {
+        self.token_source.text()
+    }
+
+    pub(crate) fn text_matches(&self, text: &str) -> bool {
+        self.token_source.text_matches(text)
     }
 }

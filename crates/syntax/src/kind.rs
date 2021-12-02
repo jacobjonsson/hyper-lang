@@ -36,12 +36,23 @@ pub enum SyntaxKind {
     GreaterThan,
     Bang,
 
+    // Keywords
     Func,
     View,
     Let,
     Mut,
     State,
     Return,
+
+    // Composite tokens
+    PlusEquals,
+    MinusEquals,
+    StarEquals,
+    SlashEquals,
+    LessThanSlash,
+    SlashGreaterThan,
+    EqualsEquals,
+    BangEquals,
 
     // Nodes
     SourceFile,
@@ -58,9 +69,6 @@ pub enum SyntaxKind {
     LetStmt,
     StateStmt,
     XmlElement,
-    XmlSelfClosingElement,
-    XmlOpeningElement,
-    XmlClosingElement,
     XmlAttributeList,
     XmlAttribute,
 

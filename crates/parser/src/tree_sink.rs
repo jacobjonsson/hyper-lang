@@ -43,10 +43,7 @@ impl<'a> TreeSink<'a> {
         };
         self.eat_trivias();
         let n_tokens = n_tokens as usize;
-        let len = self.tokens[self.token_pos..self.token_pos + n_tokens]
-            .iter()
-            .map(|it| it.len)
-            .sum::<TextSize>();
+        let len = self.tokens[self.token_pos..self.token_pos + n_tokens].iter().map(|it| it.len).sum::<TextSize>();
         self.do_token(kind, len, n_tokens);
     }
 
@@ -86,8 +83,7 @@ impl<'a> TreeSink<'a> {
     }
 
     pub(crate) fn error(&mut self, error: ParseError) {
-        self.errors
-            .push(SyntaxError::new_at_offset(error.0, self.text_pos));
+        self.errors.push(SyntaxError::new_at_offset(error.0, self.text_pos));
     }
 
     fn eat_trivias(&mut self) {

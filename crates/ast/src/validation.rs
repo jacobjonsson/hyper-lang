@@ -10,13 +10,7 @@ pub struct ValidationError {
 
 impl fmt::Display for ValidationError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(
-            f,
-            "error at {}..{}: {}",
-            u32::from(self.range.start()),
-            u32::from(self.range.end()),
-            self.kind
-        )
+        write!(f, "error at {}..{}: {}", u32::from(self.range.start()), u32::from(self.range.end()), self.kind)
     }
 }
 

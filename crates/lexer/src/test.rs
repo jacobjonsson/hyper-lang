@@ -53,54 +53,18 @@ fn smoke_test() {
 
     let source = "(){}[]+-/*123func";
     let expected = &[
-        Token {
-            kind: LeftParen,
-            len: 1.into(),
-        },
-        Token {
-            kind: RightParen,
-            len: 1.into(),
-        },
-        Token {
-            kind: LeftBrace,
-            len: 1.into(),
-        },
-        Token {
-            kind: RightBrace,
-            len: 1.into(),
-        },
-        Token {
-            kind: LeftBracket,
-            len: 1.into(),
-        },
-        Token {
-            kind: RightBracket,
-            len: 1.into(),
-        },
-        Token {
-            kind: Plus,
-            len: 1.into(),
-        },
-        Token {
-            kind: Minus,
-            len: 1.into(),
-        },
-        Token {
-            kind: Slash,
-            len: 1.into(),
-        },
-        Token {
-            kind: Star,
-            len: 1.into(),
-        },
-        Token {
-            kind: Integer,
-            len: 3.into(),
-        },
-        Token {
-            kind: Func,
-            len: 4.into(),
-        },
+        Token { kind: LeftParen, len: 1.into() },
+        Token { kind: RightParen, len: 1.into() },
+        Token { kind: LeftBrace, len: 1.into() },
+        Token { kind: RightBrace, len: 1.into() },
+        Token { kind: LeftBracket, len: 1.into() },
+        Token { kind: RightBracket, len: 1.into() },
+        Token { kind: Plus, len: 1.into() },
+        Token { kind: Minus, len: 1.into() },
+        Token { kind: Slash, len: 1.into() },
+        Token { kind: Star, len: 1.into() },
+        Token { kind: Integer, len: 3.into() },
+        Token { kind: Func, len: 4.into() },
     ];
 
     let actual = tokenize(source);

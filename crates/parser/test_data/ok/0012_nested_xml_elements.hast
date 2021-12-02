@@ -1,0 +1,61 @@
+SourceFile@0..125
+  View@0..125
+    View@0..4 "view"
+    Whitespace@4..5 " "
+    Name@5..9
+      Identifier@5..9 "main"
+    ParamList@9..11
+      LeftParen@9..10 "("
+      RightParen@10..11 ")"
+    Whitespace@11..12 " "
+    LeftBrace@12..13 "{"
+    Whitespace@13..18 "\n    "
+    ReturnStmt@18..123
+      Return@18..24 "return"
+      Whitespace@24..25 " "
+      LeftParen@25..26 "("
+      Whitespace@26..35 "\n        "
+      XmlElement@35..116
+        LessThan@35..36 "<"
+        NameRef@36..39
+          Identifier@36..39 "div"
+        XmlAttributeList@39..39
+        GreaterThan@39..40 ">"
+        Whitespace@40..53 "\n            "
+        XmlElement@53..70
+          LessThan@53..54 "<"
+          NameRef@54..56
+            Identifier@54..56 "h1"
+          XmlAttributeList@56..56
+          GreaterThan@56..57 ">"
+          Identifier@57..59 "My"
+          Whitespace@59..60 " "
+          Identifier@60..65 "title"
+          LessThanSlash@65..67 "</"
+          NameRef@67..69
+            Identifier@67..69 "h1"
+          GreaterThan@69..70 ">"
+        Whitespace@70..84 "\n\n            "
+        XmlElement@84..101
+          LessThan@84..85 "<"
+          NameRef@85..86
+            Identifier@85..86 "p"
+          XmlAttributeList@86..86
+          GreaterThan@86..87 ">"
+          Identifier@87..89 "My"
+          Whitespace@89..90 " "
+          Identifier@90..97 "content"
+          LessThanSlash@97..99 "</"
+          NameRef@99..100
+            Identifier@99..100 "p"
+          GreaterThan@100..101 ">"
+        Whitespace@101..110 "\n        "
+        LessThanSlash@110..112 "</"
+        NameRef@112..115
+          Identifier@112..115 "div"
+        GreaterThan@115..116 ">"
+      Whitespace@116..121 "\n    "
+      RightParen@121..122 ")"
+      Semicolon@122..123 ";"
+    Whitespace@123..124 "\n"
+    RightBrace@124..125 "}"

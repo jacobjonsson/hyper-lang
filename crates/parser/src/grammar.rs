@@ -4,10 +4,10 @@ mod item;
 mod param;
 mod stmt;
 mod view;
-
-use syntax::SyntaxKind;
+mod xml;
 
 use crate::parser::Parser;
+use syntax::SyntaxKind;
 
 pub(crate) fn source_file(parser: &mut Parser) {
     let marker = parser.start();
@@ -26,7 +26,6 @@ pub(super) fn name(parser: &mut Parser) {
     marker.complete(parser, SyntaxKind::Name);
 }
 
-#[allow(dead_code)]
 pub(super) fn name_ref(parser: &mut Parser) {
     if !parser.at(SyntaxKind::Identifier) {
         parser.error("expected an identifier");

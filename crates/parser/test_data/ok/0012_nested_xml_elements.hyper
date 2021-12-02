@@ -1,0 +1,9 @@
+view main() {
+    return (
+        <div>
+            <h1>My title</h1>
+
+            <p>My content</p>
+        </div>
+    );
+}

@@ -1,20 +1,14 @@
-use crate::{support, traits::HasName, AstChildren, AstNode};
+use crate::{func::Func, support, view::View, AstChildren, AstNode};
 use syntax::{SyntaxKind, SyntaxNode, SyntaxToken};
 
 pub struct SourceFile(SyntaxNode);
 
 impl AstNode for SourceFile {
-    fn can_cast(kind: SyntaxKind) -> bool
-    where
-        Self: Sized,
-    {
+    fn can_cast(kind: SyntaxKind) -> bool {
         kind == SyntaxKind::SourceFile
     }
 
-    fn cast(syntax: SyntaxNode) -> Option<Self>
-    where
-        Self: Sized,
-    {
+    fn cast(syntax: SyntaxNode) -> Option<Self> {
         if Self::can_cast(syntax.kind()) {
             Some(Self(syntax))
         } else {
@@ -36,23 +30,23 @@ impl SourceFile {
 #[derive(Debug)]
 pub enum Item {
     Func(Func),
+    View(View),
 }
 
 impl AstNode for Item {
     fn can_cast(kind: SyntaxKind) -> bool {
         match kind {
             SyntaxKind::Func => true,
+            SyntaxKind::View => true,
             _ => false,
         }
     }
 
-    fn cast(syntax: SyntaxNode) -> Option<Self>
-    where
-        Self: Sized,
-    {
+    fn cast(syntax: SyntaxNode) -> Option<Self> {
         if Self::can_cast(syntax.kind()) {
             let item = match syntax.kind() {
-                SyntaxKind::Func => Item::Func(Func(syntax)),
+                SyntaxKind::Func => Item::Func(Func { syntax }),
+                SyntaxKind::View => Item::View(View { syntax }),
                 _ => return None,
             };
 
@@ -65,62 +59,8 @@ impl AstNode for Item {
     fn syntax(&self) -> &SyntaxNode {
         match self {
             Item::Func(func) => func.syntax(),
+            Item::View(view) => view.syntax(),
         }
-    }
-}
-
-#[derive(Debug)]
-pub struct Func(SyntaxNode);
-
-impl HasName for Func {}
-
-impl AstNode for Func {
-    fn can_cast(kind: SyntaxKind) -> bool {
-        kind == SyntaxKind::Func
-    }
-
-    fn cast(syntax: SyntaxNode) -> Option<Self>
-    where
-        Self: Sized,
-    {
-        if Self::can_cast(syntax.kind()) {
-            Some(Self(syntax))
-        } else {
-            None
-        }
-    }
-
-    fn syntax(&self) -> &SyntaxNode {
-        &self.0
-    }
-}
-
-#[derive(Debug)]
-pub struct View(SyntaxNode);
-
-impl HasName for View {}
-
-impl AstNode for View {
-    fn can_cast(kind: SyntaxKind) -> bool
-    where
-        Self: Sized,
-    {
-        kind == SyntaxKind::View
-    }
-
-    fn cast(syntax: SyntaxNode) -> Option<Self>
-    where
-        Self: Sized,
-    {
-        if Self::can_cast(syntax.kind()) {
-            Some(Self(syntax))
-        } else {
-            None
-        }
-    }
-
-    fn syntax(&self) -> &SyntaxNode {
-        &self.0
     }
 }
 
@@ -128,17 +68,11 @@ impl AstNode for View {
 pub struct Name(SyntaxNode);
 
 impl AstNode for Name {
-    fn can_cast(kind: SyntaxKind) -> bool
-    where
-        Self: Sized,
-    {
+    fn can_cast(kind: SyntaxKind) -> bool {
         kind == SyntaxKind::Name
     }
 
-    fn cast(syntax: SyntaxNode) -> Option<Self>
-    where
-        Self: Sized,
-    {
+    fn cast(syntax: SyntaxNode) -> Option<Self> {
         if Self::can_cast(syntax.kind()) {
             Some(Self(syntax))
         } else {
@@ -154,5 +88,34 @@ impl AstNode for Name {
 impl Name {
     pub fn identifier(&self) -> Option<SyntaxToken> {
         support::token(&self.0, SyntaxKind::Identifier)
+    }
+}
+
+#[derive(Debug)]
+pub struct NameRef {
+    pub(crate) syntax: SyntaxNode,
+}
+
+impl AstNode for NameRef {
+    fn can_cast(kind: SyntaxKind) -> bool {
+        kind == SyntaxKind::NameRef
+    }
+
+    fn cast(syntax: SyntaxNode) -> Option<Self> {
+        if Self::can_cast(syntax.kind()) {
+            Some(Self { syntax })
+        } else {
+            None
+        }
+    }
+
+    fn syntax(&self) -> &SyntaxNode {
+        &self.syntax
+    }
+}
+
+impl NameRef {
+    pub fn identifier(&self) -> Option<SyntaxToken> {
+        support::token(&self.syntax(), SyntaxKind::Identifier)
     }
 }

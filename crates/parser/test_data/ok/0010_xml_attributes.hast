@@ -1,5 +1,5 @@
-SourceFile@0..45
-  View@0..45
+SourceFile@0..55
+  View@0..55
     View@0..4 "view"
     Whitespace@4..5 " "
     Name@5..8
@@ -10,15 +10,15 @@ SourceFile@0..45
     Whitespace@10..11 " "
     LeftBrace@11..12 "{"
     Whitespace@12..17 "\n    "
-    ReturnStmt@17..43
+    ReturnStmt@17..53
       Return@17..23 "return"
       Whitespace@23..24 " "
-      XmlSelfClosingElement@24..43
+      XmlElement@24..53
         LessThan@24..25 "<"
         NameRef@25..28
           Identifier@25..28 "div"
         Whitespace@28..29 " "
-        XmlAttributeList@29..40
+        XmlAttributeList@29..50
           XmlAttribute@29..40
             NameRef@29..34
               Identifier@29..34 "count"
@@ -27,8 +27,14 @@ SourceFile@0..45
             Literal@36..39
               Integer@36..39 "123"
             RightBrace@39..40 "}"
-        Whitespace@40..41 " "
-        Slash@41..42 "/"
-        GreaterThan@42..43 ">"
-    Whitespace@43..44 "\n"
-    RightBrace@44..45 "}"
+          Whitespace@40..41 " "
+          XmlAttribute@41..50
+            NameRef@41..44
+              Identifier@41..44 "abc"
+            Equals@44..45 "="
+            Literal@45..50
+              String@45..50 "\"abc\""
+        Whitespace@50..51 " "
+        SlashGreaterThan@51..53 "/>"
+    Whitespace@53..54 "\n"
+    RightBrace@54..55 "}"

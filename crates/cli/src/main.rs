@@ -1,5 +1,9 @@
+use ast::{AstNode, XmlElement};
 use parser::parse;
-use std::io::{stdin, stdout, Write};
+use std::{
+    io::{stdin, stdout, Write},
+    process::exit,
+};
 
 fn main() {
     loop {
@@ -10,7 +14,22 @@ fn main() {
         let mut input = String::new();
         stdin().read_line(&mut input).unwrap();
 
-        let parse = parse(&input);
-        println!("{}", parse.debug_tree());
+        let parse = parse(&input).ok();
+
+        if parse.is_err() {
+            print!("Failed to parse.:");
+            println!("{:?}", parse.unwrap_err());
+            exit(-1);
+        }
+
+        println!("Parsed successfully");
+
+        for node in parse.unwrap().descendants() {
+            if XmlElement::can_cast(node.kind()) {
+                let element = XmlElement::cast(node).unwrap();
+
+                println!("{:?}", element.name_ref().unwrap().syntax().text());
+            }
+        }
     }
 }

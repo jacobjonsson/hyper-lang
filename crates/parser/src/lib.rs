@@ -19,7 +19,7 @@ use crate::parser::Parser;
 
 pub fn parse(source: &str) -> Parse {
     let raw_tokens = lexer::tokenize(source);
-    let token_source = TokenSource::new(&raw_tokens);
+    let token_source = TokenSource::new(source, &raw_tokens);
     let mut parser = Parser::new(token_source);
     grammar::source_file(&mut parser);
     let events = parser.finish();
@@ -46,10 +46,7 @@ pub struct Parse {
 
 impl Parse {
     pub fn new(green: GreenNode, errors: Vec<SyntaxError>) -> Self {
-        Self {
-            green_node: green,
-            errors,
-        }
+        Self { green_node: green, errors }
     }
 
     pub fn syntax(&self) -> SyntaxNode {

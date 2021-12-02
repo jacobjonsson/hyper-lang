@@ -1,0 +1,3 @@
+view main() {
+    return <div backgroundColor="blue"></div>;
+}
