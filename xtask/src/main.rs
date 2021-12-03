@@ -1,14 +1,15 @@
 mod ast;
-mod syntax_kinds;
+mod codegen;
 
 use std::env;
 use std::fs::File;
 use std::io::{Result, Write};
 use std::path::{Path, PathBuf};
 use std::process::{Command, Stdio};
-use syntax_kinds::generate_syntax_kinds;
 
 pub(crate) const SYNTAX_KINDS: &str = "crates/syntax/src/generated.rs";
+pub(crate) const AST_TOKENS: &str = "crates/ast/src/generated/tokens.rs";
+pub(crate) const AST_NODES: &str = "crates/ast/src/generated/nodes.rs";
 
 fn main() -> Result<()> {
     let command = match env::args().nth(1) {
@@ -16,9 +17,10 @@ fn main() -> Result<()> {
         None => panic!("no command given"),
     };
 
-    let syntax_kinds_file = project_root().join(SYNTAX_KINDS);
-    let syntax_kinds = generate_syntax_kinds(ast::KINDS_SRC);
-    write_to_file(reformat(syntax_kinds)?, &syntax_kinds_file)?;
+    if command == "codegen" {
+        codegen::generate_syntax()?;
+        return Ok(());
+    }
 
     println!("{:?}", command);
 

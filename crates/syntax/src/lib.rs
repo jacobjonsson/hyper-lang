@@ -2,7 +2,6 @@ mod generated;
 mod language;
 
 pub use generated::SyntaxKind;
-
 pub use language::HyperLanguage;
 pub use language::SyntaxElement;
 pub use language::SyntaxNode;
