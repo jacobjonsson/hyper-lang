@@ -1,6 +1,7 @@
 pub(crate) struct KindsSrc<'a> {
     pub(crate) punct: &'a [(&'a str, &'a str)],
     pub(crate) keywords: &'a [&'a str],
+    #[allow(dead_code)]
     pub(crate) contextual_keywords: &'a [&'a str],
     pub(crate) literals: &'a [&'a str],
     pub(crate) tokens: &'a [&'a str],
@@ -86,6 +87,7 @@ pub(crate) enum Field<'a> {
 }
 
 pub(crate) enum FieldSrc<'a> {
+    #[allow(dead_code)]
     Shorthand,
     Optional(&'a str),
     Many(&'a str),
