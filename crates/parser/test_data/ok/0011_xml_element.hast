@@ -1,35 +1,35 @@
-SourceFile@0..62
-  View@0..62
-    View@0..4 "view"
-    Whitespace@4..5 " "
-    Name@5..9
-      Identifier@5..9 "main"
-    ParamList@9..11
-      LeftParen@9..10 "("
-      RightParen@10..11 ")"
-    Whitespace@11..12 " "
-    LeftBrace@12..13 "{"
-    Whitespace@13..18 "\n    "
-    ReturnStmt@18..60
-      Return@18..24 "return"
-      Whitespace@24..25 " "
-      XmlElement@25..59
-        LessThan@25..26 "<"
-        NameRef@26..29
-          Identifier@26..29 "div"
-        Whitespace@29..30 " "
-        XmlAttributeList@30..52
-          XmlAttribute@30..52
-            NameRef@30..45
-              Identifier@30..45 "backgroundColor"
-            Equals@45..46 "="
-            Literal@46..52
-              String@46..52 "\"blue\""
-        GreaterThan@52..53 ">"
-        LessThanSlash@53..55 "</"
-        NameRef@55..58
-          Identifier@55..58 "div"
-        GreaterThan@58..59 ">"
-      Semicolon@59..60 ";"
-    Whitespace@60..61 "\n"
-    RightBrace@61..62 "}"
+SOURCE_FILE@0..62
+  VIEW_KW@0..62
+    VIEW_KW@0..4 "view"
+    WHITESPACE@4..5 " "
+    NAME@5..9
+      IDENT@5..9 "main"
+    PARAM_LIST@9..11
+      L_PAREN@9..10 "("
+      R_PAREN@10..11 ")"
+    WHITESPACE@11..12 " "
+    L_BRACE@12..13 "{"
+    WHITESPACE@13..18 "\n    "
+    RETURN_KW@18..60
+      RETURN_KW@18..24 "return"
+      WHITESPACE@24..25 " "
+      XML_ELEMENT@25..59
+        L_ANGLE@25..26 "<"
+        NAME_REF@26..29
+          IDENT@26..29 "div"
+        WHITESPACE@29..30 " "
+        XML_ATTRIBUTE_LIST@30..52
+          XML_ATTRIBUTE@30..52
+            NAME_REF@30..45
+              IDENT@30..45 "backgroundColor"
+            EQ@45..46 "="
+            LITERAL@46..52
+              STRING@46..52 "\"blue\""
+        R_ANGLE@52..53 ">"
+        L_ANGLE_SLASH@53..55 "</"
+        NAME_REF@55..58
+          IDENT@55..58 "div"
+        R_ANGLE@58..59 ">"
+      SEMICOLON@59..60 ";"
+    WHITESPACE@60..61 "\n"
+    R_BRACE@61..62 "}"

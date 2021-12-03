@@ -5,7 +5,7 @@ mod cursor;
 mod token;
 
 use self::cursor::Cursor;
-use syntax::SyntaxKind;
+use syntax::{SyntaxKind, T};
 pub use token::Token;
 
 pub fn tokenize(mut input: &str) -> Vec<Token> {
@@ -34,36 +34,36 @@ impl<'a> Cursor<'a> {
         let first_char = self.bump().unwrap();
 
         let kind = match first_char {
-            '(' => SyntaxKind::LeftParen,
-            ')' => SyntaxKind::RightParen,
-            '{' => SyntaxKind::LeftBrace,
-            '}' => SyntaxKind::RightBrace,
-            '[' => SyntaxKind::LeftBracket,
-            ']' => SyntaxKind::RightBracket,
-            '%' => SyntaxKind::Percent,
-            '+' => SyntaxKind::Plus,
-            '-' => SyntaxKind::Minus,
-            '*' => SyntaxKind::Star,
-            ';' => SyntaxKind::Semicolon,
-            '=' => SyntaxKind::Equals,
-            '.' => SyntaxKind::Dot,
-            ',' => SyntaxKind::Comma,
-            '<' => SyntaxKind::LessThan,
-            '>' => SyntaxKind::GreaterThan,
-            '!' => SyntaxKind::Bang,
+            '(' => T!['('],
+            ')' => T![')'],
+            '{' => T!['{'],
+            '}' => T!['}'],
+            '[' => T!['['],
+            ']' => T![']'],
+            '%' => T![%],
+            '+' => T![+],
+            '-' => T![-],
+            '*' => T![*],
+            ';' => T![;],
+            '=' => T![=],
+            '.' => T![.],
+            ',' => T![,],
+            '<' => T![<],
+            '>' => T![>],
+            '!' => T![!],
             '/' => {
                 if self.first() == '/' {
                     self.bump();
                     self.single_line_comment()
                 } else {
-                    SyntaxKind::Slash
+                    T![/]
                 }
             }
             '"' => self.string(),
             '0'..='9' => self.integer(),
             ch if is_whitespace(ch) => self.whitespace(),
             ch if is_identifier_star(ch) => self.identifier_or_keyword(),
-            _ => SyntaxKind::Error,
+            _ => SyntaxKind::ERROR,
         };
 
         Token::new(kind, (self.len_consumed() as u32).into())
@@ -86,7 +86,7 @@ impl<'a> Cursor<'a> {
             }
         }
 
-        SyntaxKind::Comment
+        SyntaxKind::COMMENT
     }
 
     fn whitespace(&mut self) -> SyntaxKind {
@@ -94,7 +94,7 @@ impl<'a> Cursor<'a> {
             self.bump();
         }
 
-        SyntaxKind::Whitespace
+        SyntaxKind::WHITESPACE
     }
 
     fn integer(&mut self) -> SyntaxKind {
@@ -102,7 +102,7 @@ impl<'a> Cursor<'a> {
             self.bump();
         }
 
-        SyntaxKind::Integer
+        SyntaxKind::INT
     }
 
     fn string(&mut self) -> SyntaxKind {
@@ -110,13 +110,13 @@ impl<'a> Cursor<'a> {
             match self.first() {
                 '"' => {
                     self.bump();
-                    return SyntaxKind::String;
+                    return SyntaxKind::STRING;
                 }
                 '\\' => {
                     self.bump();
                     self.bump();
                 }
-                '\0' => return SyntaxKind::Error,
+                '\0' => return SyntaxKind::ERROR,
                 _ => {
                     self.bump();
                 }
@@ -130,17 +130,8 @@ impl<'a> Cursor<'a> {
         }
 
         let text = self.text();
-        match text {
-            "func" => SyntaxKind::Func,
-            "view" => SyntaxKind::View,
-            "let" => SyntaxKind::Let,
-            "mut" => SyntaxKind::Mut,
-            "state" => SyntaxKind::State,
-            "return" => SyntaxKind::Return,
-            "true" => SyntaxKind::True,
-            "false" => SyntaxKind::False,
-            _ => SyntaxKind::Identifier,
-        }
+
+        SyntaxKind::from_keyword(text).unwrap_or(SyntaxKind::IDENT)
     }
 }
 

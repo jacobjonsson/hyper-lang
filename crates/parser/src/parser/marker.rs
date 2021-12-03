@@ -38,7 +38,7 @@ impl Marker {
         let idx = self.pos as usize;
         if idx == parser.events.len() - 1 {
             match parser.events.pop() {
-                Some(Event::Start { kind: SyntaxKind::Tombstone, forward_parent: None }) => (),
+                Some(Event::Start { kind: SyntaxKind::TOMBSTONE, forward_parent: None }) => (),
                 _ => unreachable!(),
             }
         }

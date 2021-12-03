@@ -2,6 +2,7 @@ use crate::parser::CompletedMarker;
 use crate::parser::Parser;
 use crate::token_set::TokenSet;
 use syntax::SyntaxKind;
+use syntax::T;
 
 pub(super) fn expr(parser: &mut Parser) {
     expr_bp(parser, 1);
@@ -12,15 +13,15 @@ pub(super) fn expr(parser: &mut Parser) {
 /// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#table
 fn current_op(parser: &mut Parser) -> (u8, SyntaxKind) {
     match parser.current() {
-        SyntaxKind::Star => (13, SyntaxKind::Star),
-        SyntaxKind::Slash => (13, SyntaxKind::Slash),
-        SyntaxKind::Percent => (13, SyntaxKind::Percent),
-        SyntaxKind::Plus => (12, SyntaxKind::Plus),
-        SyntaxKind::Minus => (12, SyntaxKind::Plus),
-        SyntaxKind::LessThan => (11, SyntaxKind::LessThan),
-        SyntaxKind::GreaterThan => (11, SyntaxKind::GreaterThan),
-        SyntaxKind::Equals => (2, SyntaxKind::Equals),
-        SyntaxKind::Comma => (1, SyntaxKind::Comma),
+        T![*] => (13, T![*]),
+        T![/] => (13, T![/]),
+        T![%] => (13, T![%]),
+        T![+] => (12, T![+]),
+        T![-] => (12, T![-]),
+        T![<] => (11, T![<]),
+        T![>] => (11, T![>]),
+        T![=] => (2, T![=]),
+        T![,] => (1, T![,]),
 
         _ => (0, parser.current()),
     }
@@ -48,11 +49,11 @@ fn expr_bp(parser: &mut Parser, bp: u8) {
         parser.bump(op);
 
         expr_bp(parser, op_bp + 1);
-        lhs = marker.complete(parser, SyntaxKind::BinaryExpr);
+        lhs = marker.complete(parser, SyntaxKind::BINARY_EXPR);
     }
 }
 
-pub(crate) const UNARY_FIRST: TokenSet = TokenSet::new(&[SyntaxKind::Bang, SyntaxKind::Plus, SyntaxKind::Minus]);
+pub(crate) const UNARY_FIRST: TokenSet = TokenSet::new(&[T![!], T![+], T![-]]);
 
 /// Parses the left hand side of an expression
 fn lhs(parser: &mut Parser) -> Option<CompletedMarker> {
@@ -64,15 +65,15 @@ fn lhs(parser: &mut Parser) -> Option<CompletedMarker> {
         let marker = parser.start();
         parser.bump_any();
         expr_bp(parser, 255);
-        let done = marker.complete(parser, SyntaxKind::UnaryExpr);
+        let done = marker.complete(parser, SyntaxKind::UNARY_EXPR);
         return Some(done);
     }
 
     let done = match parser.current() {
-        SyntaxKind::Identifier => {
+        SyntaxKind::IDENT => {
             let marker = parser.start();
-            parser.bump(SyntaxKind::Identifier);
-            marker.complete(parser, SyntaxKind::NameRef)
+            parser.bump(SyntaxKind::IDENT);
+            marker.complete(parser, SyntaxKind::NAME_REF)
         }
         _ => return None,
     };
@@ -81,7 +82,7 @@ fn lhs(parser: &mut Parser) -> Option<CompletedMarker> {
 }
 
 pub(crate) const LITERAL_FIRST: TokenSet =
-    TokenSet::new(&[SyntaxKind::True, SyntaxKind::False, SyntaxKind::String, SyntaxKind::Integer]);
+    TokenSet::new(&[SyntaxKind::TRUE_KW, SyntaxKind::FALSE_KW, SyntaxKind::STRING, SyntaxKind::INT]);
 
 pub(super) fn literal(parser: &mut Parser) -> Option<CompletedMarker> {
     if !parser.at_ts(LITERAL_FIRST) {
@@ -89,5 +90,5 @@ pub(super) fn literal(parser: &mut Parser) -> Option<CompletedMarker> {
     }
     let marker = parser.start();
     parser.bump_any();
-    Some(marker.complete(parser, SyntaxKind::Literal))
+    Some(marker.complete(parser, SyntaxKind::LITERAL))
 }

@@ -1,38 +1,38 @@
-SourceFile@0..41
-  Func@0..41
-    Func@0..4 "func"
-    Whitespace@4..5 " "
-    Name@5..9
-      Identifier@5..9 "main"
-    ParamList@9..11
-      LeftParen@9..10 "("
-      RightParen@10..11 ")"
-    Whitespace@11..12 " "
-    LeftBrace@12..13 "{"
-    Whitespace@13..18 "\n    "
-    ReturnStmt@18..39
-      Return@18..24 "return"
-      Whitespace@24..25 " "
-      BinaryExpr@25..38
-        Literal@25..26
-          Integer@25..26 "1"
-        Whitespace@26..27 " "
-        Plus@27..28 "+"
-        Whitespace@28..29 " "
-        BinaryExpr@29..38
-          BinaryExpr@29..34
-            Literal@29..30
-              Integer@29..30 "2"
-            Whitespace@30..31 " "
-            Star@31..32 "*"
-            Whitespace@32..33 " "
-            Literal@33..34
-              Integer@33..34 "3"
-          Whitespace@34..35 " "
-          Slash@35..36 "/"
-          Whitespace@36..37 " "
-          Literal@37..38
-            Integer@37..38 "4"
-      Semicolon@38..39 ";"
-    Whitespace@39..40 "\n"
-    RightBrace@40..41 "}"
+SOURCE_FILE@0..41
+  FUNC_KW@0..41
+    FUNC_KW@0..4 "func"
+    WHITESPACE@4..5 " "
+    NAME@5..9
+      IDENT@5..9 "main"
+    PARAM_LIST@9..11
+      L_PAREN@9..10 "("
+      R_PAREN@10..11 ")"
+    WHITESPACE@11..12 " "
+    L_BRACE@12..13 "{"
+    WHITESPACE@13..18 "\n    "
+    RETURN_STMT@18..39
+      RETURN_KW@18..24 "return"
+      WHITESPACE@24..25 " "
+      BINARY_EXPR@25..38
+        LITERAL@25..26
+          INT@25..26 "1"
+        WHITESPACE@26..27 " "
+        PLUS@27..28 "+"
+        WHITESPACE@28..29 " "
+        BINARY_EXPR@29..38
+          BINARY_EXPR@29..34
+            LITERAL@29..30
+              INT@29..30 "2"
+            WHITESPACE@30..31 " "
+            STAR@31..32 "*"
+            WHITESPACE@32..33 " "
+            LITERAL@33..34
+              INT@33..34 "3"
+          WHITESPACE@34..35 " "
+          SLASH@35..36 "/"
+          WHITESPACE@36..37 " "
+          LITERAL@37..38
+            INT@37..38 "4"
+      SEMICOLON@38..39 ";"
+    WHITESPACE@39..40 "\n"
+    R_BRACE@40..41 "}"

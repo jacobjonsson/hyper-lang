@@ -3,48 +3,48 @@ use super::{
     name_ref,
 };
 use crate::parser::Parser;
-use syntax::SyntaxKind;
+use syntax::{SyntaxKind, T};
 
 pub(super) fn xml_element(parser: &mut Parser) {
     let marker = parser.start();
-    parser.expect(SyntaxKind::LessThan);
+    parser.expect(T![<]);
     let tag_name = parser.text().unwrap_or("");
     name_ref(parser);
     xml_attribute_list(parser);
 
-    if parser.at(SyntaxKind::SlashGreaterThan) {
-        parser.bump(SyntaxKind::SlashGreaterThan);
-        marker.complete(parser, SyntaxKind::XmlElement);
+    if parser.at(T![/>]) {
+        parser.bump(T![/>]);
+        marker.complete(parser, SyntaxKind::XML_ELEMENT);
         return;
     }
 
-    parser.expect(SyntaxKind::GreaterThan);
+    parser.expect(T![>]);
 
     loop {
-        if parser.at(SyntaxKind::Eof) {
+        if parser.at(SyntaxKind::EOF) {
             parser.error("unterminated xml element");
-            marker.complete(parser, SyntaxKind::XmlElement);
+            marker.complete(parser, SyntaxKind::XML_ELEMENT);
             return;
         }
 
-        if parser.at(SyntaxKind::LeftBrace) {
+        if parser.at(T!['{']) {
             expr(parser);
         }
 
         // Closing tag
-        if parser.at(SyntaxKind::LessThanSlash) {
-            parser.bump(SyntaxKind::LessThanSlash);
+        if parser.at(T![</]) {
+            parser.bump(T![</]);
             if !parser.text_matches(tag_name) {
                 parser.error(format!("expected closing tag to match {}", tag_name));
             }
             name_ref(parser);
-            parser.expect(SyntaxKind::GreaterThan);
-            marker.complete(parser, SyntaxKind::XmlElement);
+            parser.expect(T![>]);
+            marker.complete(parser, SyntaxKind::XML_ELEMENT);
             return;
         }
 
         // A child xml element
-        if parser.at(SyntaxKind::LessThan) {
+        if parser.at(T![<]) {
             xml_element(parser);
             continue;
         }
@@ -57,28 +57,27 @@ pub(super) fn xml_element(parser: &mut Parser) {
 fn xml_attribute_list(parser: &mut Parser) {
     let marker = parser.start();
 
-    while !parser.at(SyntaxKind::Eof) && !parser.at(SyntaxKind::SlashGreaterThan) && !parser.at(SyntaxKind::GreaterThan)
-    {
+    while !parser.at(SyntaxKind::EOF) && !parser.at(T![/>]) && !parser.at(T![>]) {
         xml_attribute(parser);
     }
 
-    marker.complete(parser, SyntaxKind::XmlAttributeList);
+    marker.complete(parser, SyntaxKind::XML_ATTRIBUTE_LIST);
 }
 
 fn xml_attribute(parser: &mut Parser) {
     let marker = parser.start();
     name_ref(parser);
-    parser.expect(SyntaxKind::Equals);
+    parser.expect(T![=]);
 
-    if parser.at(SyntaxKind::String) {
+    if parser.at(SyntaxKind::STRING) {
         literal(parser);
-    } else if parser.at(SyntaxKind::LeftBrace) {
-        parser.bump(SyntaxKind::LeftBrace);
+    } else if parser.at(T!['{']) {
+        parser.bump(T!['{']);
         expr(parser);
-        parser.expect(SyntaxKind::RightBrace);
+        parser.expect(T!['}']);
     } else {
         parser.error("expected string or an expression wrapped in {}");
     }
 
-    marker.complete(parser, SyntaxKind::XmlAttribute);
+    marker.complete(parser, SyntaxKind::XML_ATTRIBUTE);
 }

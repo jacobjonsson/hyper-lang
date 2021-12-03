@@ -3,57 +3,57 @@ use super::stmt::state_stmt;
 use super::xml;
 use super::{name, stmt::let_stmt};
 use crate::parser::{Marker, Parser};
-use syntax::SyntaxKind;
+use syntax::{SyntaxKind, T};
 
 pub(super) fn view(parser: &mut Parser, marker: Marker) {
-    parser.bump(SyntaxKind::View);
+    parser.bump(SyntaxKind::VIEW_KW);
 
     name(parser);
 
-    if parser.at(SyntaxKind::LeftParen) {
+    if parser.at(T!['(']) {
         param_list(parser);
     } else {
         parser.error("expected view arguments");
     }
 
-    if parser.at(SyntaxKind::LeftBrace) {
+    if parser.at(T!['{']) {
         view_body(parser);
     } else {
         parser.error("expected view body");
     }
 
-    marker.complete(parser, SyntaxKind::View);
+    marker.complete(parser, SyntaxKind::VIEW_KW);
 }
 
 fn view_body(parser: &mut Parser) {
-    parser.expect(SyntaxKind::LeftBrace);
+    parser.expect(T!['{']);
 
-    while !parser.at(SyntaxKind::Eof) && !parser.at(SyntaxKind::RightBrace) {
-        if parser.at(SyntaxKind::Semicolon) {
-            parser.bump(SyntaxKind::Semicolon);
+    while !parser.at(SyntaxKind::EOF) && !parser.at(T!['}']) {
+        if parser.at(T![,]) {
+            parser.bump(T![,]);
             continue;
         }
 
         view_body_stmt(parser);
     }
 
-    parser.expect(SyntaxKind::RightBrace);
+    parser.expect(T!['}']);
 }
 
 fn view_body_stmt(parser: &mut Parser) {
     let marker = parser.start();
 
-    if parser.at(SyntaxKind::Let) {
+    if parser.at(SyntaxKind::LET_KW) {
         let_stmt(parser, marker);
         return;
     }
 
-    if parser.at(SyntaxKind::State) {
+    if parser.at(SyntaxKind::STATE_KW) {
         state_stmt(parser, marker);
         return;
     }
 
-    if parser.at(SyntaxKind::Return) {
+    if parser.at(SyntaxKind::RETURN_KW) {
         view_return_stmt(parser, marker);
         return;
     }
@@ -63,21 +63,21 @@ fn view_body_stmt(parser: &mut Parser) {
 }
 
 fn view_return_stmt(parser: &mut Parser, marker: Marker) {
-    parser.bump(SyntaxKind::Return);
+    parser.bump(SyntaxKind::RETURN_KW);
 
-    if parser.at(SyntaxKind::LeftParen) {
-        parser.bump(SyntaxKind::LeftParen);
+    if parser.at(T!['(']) {
+        parser.bump(T!['(']);
     }
 
     xml::xml_element(parser);
 
-    if parser.at(SyntaxKind::RightParen) {
-        parser.bump(SyntaxKind::RightParen);
+    if parser.at(T![')']) {
+        parser.bump(T![')']);
     }
 
-    if parser.at(SyntaxKind::Semicolon) {
-        parser.bump(SyntaxKind::Semicolon);
+    if parser.at(T![;]) {
+        parser.bump(T![;]);
     }
 
-    marker.complete(parser, SyntaxKind::ReturnStmt);
+    marker.complete(parser, SyntaxKind::RETURN_KW);
 }

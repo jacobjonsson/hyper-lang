@@ -1,22 +1,23 @@
 use super::{Parser, SyntaxKind};
+use syntax::T;
 
 /// Assumes that current token is a left paren.
 pub(super) fn param_list(parser: &mut Parser) {
     let marker = parser.start();
 
-    parser.expect(SyntaxKind::LeftParen);
+    parser.expect(T!['(']);
 
-    while !parser.at(SyntaxKind::Eof) && parser.at(SyntaxKind::LeftParen) {
+    while !parser.at(SyntaxKind::EOF) && parser.at(T!['(']) {
         param(parser);
 
-        if !parser.at(SyntaxKind::LeftParen) {
-            parser.expect(SyntaxKind::Comma);
+        if !parser.at(T!['(']) {
+            parser.expect(T![,]);
         }
     }
 
-    parser.expect(SyntaxKind::RightParen);
+    parser.expect(T![')']);
 
-    marker.complete(parser, SyntaxKind::ParamList);
+    marker.complete(parser, SyntaxKind::PARAM_LIST);
 }
 
 pub(super) fn param(_parser: &mut Parser) {

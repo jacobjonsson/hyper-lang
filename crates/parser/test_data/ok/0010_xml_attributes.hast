@@ -1,40 +1,40 @@
-SourceFile@0..55
-  View@0..55
-    View@0..4 "view"
-    Whitespace@4..5 " "
-    Name@5..8
-      Identifier@5..8 "app"
-    ParamList@8..10
-      LeftParen@8..9 "("
-      RightParen@9..10 ")"
-    Whitespace@10..11 " "
-    LeftBrace@11..12 "{"
-    Whitespace@12..17 "\n    "
-    ReturnStmt@17..53
-      Return@17..23 "return"
-      Whitespace@23..24 " "
-      XmlElement@24..53
-        LessThan@24..25 "<"
-        NameRef@25..28
-          Identifier@25..28 "div"
-        Whitespace@28..29 " "
-        XmlAttributeList@29..50
-          XmlAttribute@29..40
-            NameRef@29..34
-              Identifier@29..34 "count"
-            Equals@34..35 "="
-            LeftBrace@35..36 "{"
-            Literal@36..39
-              Integer@36..39 "123"
-            RightBrace@39..40 "}"
-          Whitespace@40..41 " "
-          XmlAttribute@41..50
-            NameRef@41..44
-              Identifier@41..44 "abc"
-            Equals@44..45 "="
-            Literal@45..50
-              String@45..50 "\"abc\""
-        Whitespace@50..51 " "
-        SlashGreaterThan@51..53 "/>"
-    Whitespace@53..54 "\n"
-    RightBrace@54..55 "}"
+SOURCE_FILE@0..55
+  VIEW_KW@0..55
+    VIEW_KW@0..4 "view"
+    WHITESPACE@4..5 " "
+    NAME@5..8
+      IDENT@5..8 "app"
+    PARAM_LIST@8..10
+      L_PAREN@8..9 "("
+      R_PAREN@9..10 ")"
+    WHITESPACE@10..11 " "
+    L_BRACE@11..12 "{"
+    WHITESPACE@12..17 "\n    "
+    RETURN_KW@17..53
+      RETURN_KW@17..23 "return"
+      WHITESPACE@23..24 " "
+      XML_ELEMENT@24..53
+        L_ANGLE@24..25 "<"
+        NAME_REF@25..28
+          IDENT@25..28 "div"
+        WHITESPACE@28..29 " "
+        XML_ATTRIBUTE_LIST@29..50
+          XML_ATTRIBUTE@29..40
+            NAME_REF@29..34
+              IDENT@29..34 "count"
+            EQ@34..35 "="
+            L_BRACE@35..36 "{"
+            LITERAL@36..39
+              INT@36..39 "123"
+            R_BRACE@39..40 "}"
+          WHITESPACE@40..41 " "
+          XML_ATTRIBUTE@41..50
+            NAME_REF@41..44
+              IDENT@41..44 "abc"
+            EQ@44..45 "="
+            LITERAL@45..50
+              STRING@45..50 "\"abc\""
+        WHITESPACE@50..51 " "
+        SLASH_R_ANGLE@51..53 "/>"
+    WHITESPACE@53..54 "\n"
+    R_BRACE@54..55 "}"

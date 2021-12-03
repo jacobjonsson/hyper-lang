@@ -1,4 +1,5 @@
 use super::{token::Token, tokenize};
+use syntax::T;
 
 macro_rules! test_token {
     ($name:ident, $input:expr, $expected:expr) => {
@@ -12,40 +13,40 @@ macro_rules! test_token {
     };
 }
 
-test_token!(whitespace, "   ", "Whitespace@3");
-test_token!(single_line_comment, "// abc", "Comment@6");
+test_token!(whitespace, "   ", "WHITESPACE@3");
+test_token!(single_line_comment, "// abc", "COMMENT@6");
 
-test_token!(string, "\"hello\"", "String@7");
-test_token!(identifier, "hello", "Identifier@5");
-test_token!(integer, "123", "Integer@3");
-test_token!(r#true, "true", "True@4");
-test_token!(r#false, "false", "False@5");
+test_token!(string, "\"hello\"", "STRING@7");
+test_token!(identifier, "hello", "IDENT@5");
+test_token!(integer, "123", "INT@3");
+test_token!(r#true, "true", "TRUE_KW@4");
+test_token!(r#false, "false", "FALSE_KW@5");
 
-test_token!(left_paren, "(", "LeftParen@1");
-test_token!(right_paren, ")", "RightParen@1");
-test_token!(left_brace, "{", "LeftBrace@1");
-test_token!(right_brace, "}", "RightBrace@1");
-test_token!(left_bracket, "[", "LeftBracket@1");
-test_token!(right_bracket, "]", "RightBracket@1");
-test_token!(plus, "+", "Plus@1");
-test_token!(minus, "-", "Minus@1");
-test_token!(star, "*", "Star@1");
-test_token!(slash, "/", "Slash@1");
-test_token!(semicolon, ";", "Semicolon@1");
-test_token!(comma, ",", "Comma@1");
-test_token!(dot, ".", "Dot@1");
-test_token!(equals, "=", "Equals@1");
-test_token!(less_than, "<", "LessThan@1");
-test_token!(greater_than, ">", "GreaterThan@1");
-test_token!(percent, "%", "Percent@1");
-test_token!(bang, "!", "Bang@1");
+test_token!(left_paren, "(", "L_PAREN@1");
+test_token!(right_paren, ")", "R_PAREN@1");
+test_token!(left_brace, "{", "L_BRACE@1");
+test_token!(right_brace, "}", "R_BRACE@1");
+test_token!(left_bracket, "[", "L_BRACKET@1");
+test_token!(right_bracket, "]", "R_BRACKET@1");
+test_token!(plus, "+", "PLUS@1");
+test_token!(minus, "-", "MINUS@1");
+test_token!(star, "*", "STAR@1");
+test_token!(slash, "/", "SLASH@1");
+test_token!(semicolon, ";", "SEMICOLON@1");
+test_token!(comma, ",", "COMMA@1");
+test_token!(dot, ".", "DOT@1");
+test_token!(equals, "=", "EQ@1");
+test_token!(less_than, "<", "L_ANGLE@1");
+test_token!(greater_than, ">", "R_ANGLE@1");
+test_token!(percent, "%", "PERCENT@1");
+test_token!(bang, "!", "BANG@1");
 
-test_token!(func, "func", "Func@4");
-test_token!(view, "view", "View@4");
-test_token!(r#let, "let", "Let@3");
-test_token!(r#mut, "mut", "Mut@3");
-test_token!(state, "state", "State@5");
-test_token!(r#return, "return", "Return@6");
+test_token!(func, "func", "FUNC_KW@4");
+test_token!(view, "view", "VIEW_KW@4");
+test_token!(r#let, "let", "LET_KW@3");
+test_token!(r#mut, "mut", "MUT_KW@3");
+test_token!(state, "state", "STATE_KW@5");
+test_token!(r#return, "return", "RETURN_KW@6");
 
 #[test]
 fn smoke_test() {
@@ -53,18 +54,18 @@ fn smoke_test() {
 
     let source = "(){}[]+-/*123func";
     let expected = &[
-        Token { kind: LeftParen, len: 1.into() },
-        Token { kind: RightParen, len: 1.into() },
-        Token { kind: LeftBrace, len: 1.into() },
-        Token { kind: RightBrace, len: 1.into() },
-        Token { kind: LeftBracket, len: 1.into() },
-        Token { kind: RightBracket, len: 1.into() },
-        Token { kind: Plus, len: 1.into() },
-        Token { kind: Minus, len: 1.into() },
-        Token { kind: Slash, len: 1.into() },
-        Token { kind: Star, len: 1.into() },
-        Token { kind: Integer, len: 3.into() },
-        Token { kind: Func, len: 4.into() },
+        Token { kind: T!['('], len: 1.into() },
+        Token { kind: T![')'], len: 1.into() },
+        Token { kind: T!['{'], len: 1.into() },
+        Token { kind: T!['}'], len: 1.into() },
+        Token { kind: T!['['], len: 1.into() },
+        Token { kind: T![']'], len: 1.into() },
+        Token { kind: T![+], len: 1.into() },
+        Token { kind: T![-], len: 1.into() },
+        Token { kind: T![/], len: 1.into() },
+        Token { kind: T![*], len: 1.into() },
+        Token { kind: INT, len: 3.into() },
+        Token { kind: FUNC_KW, len: 4.into() },
     ];
 
     let actual = tokenize(source);

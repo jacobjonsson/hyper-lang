@@ -1,12 +1,12 @@
-SourceFile@0..13
-  View@0..13
-    View@0..4 "view"
-    Whitespace@4..5 " "
-    Name@5..8
-      Identifier@5..8 "App"
-    ParamList@8..10
-      LeftParen@8..9 "("
-      RightParen@9..10 ")"
-    Whitespace@10..11 " "
-    LeftBrace@11..12 "{"
-    RightBrace@12..13 "}"
+SOURCE_FILE@0..13
+  VIEW_KW@0..13
+    VIEW_KW@0..4 "view"
+    WHITESPACE@4..5 " "
+    NAME@5..8
+      IDENT@5..8 "App"
+    PARAM_LIST@8..10
+      L_PAREN@8..9 "("
+      R_PAREN@9..10 ")"
+    WHITESPACE@10..11 " "
+    L_BRACE@11..12 "{"
+    R_BRACE@12..13 "}"

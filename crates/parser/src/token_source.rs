@@ -35,7 +35,7 @@ impl<'a> TokenSource<'a> {
     }
 
     pub(crate) fn bump(&mut self) {
-        if self.current.0.kind == SyntaxKind::Eof {
+        if self.current.0.kind == SyntaxKind::EOF {
             return;
         }
 
@@ -61,7 +61,7 @@ fn mk_token(pos: usize, token_offset_pairs: &[(lexer::Token, TextSize)]) -> crat
             token.kind,
             token_offset_pairs.get(pos + 1).map_or(false, |(_, next_offset)| offset + token.len == *next_offset),
         ),
-        None => (SyntaxKind::Eof, false),
+        None => (SyntaxKind::EOF, false),
     };
     crate::Token { kind, is_jointed_to_next }
 }

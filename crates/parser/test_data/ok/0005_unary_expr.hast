@@ -1,22 +1,22 @@
-SourceFile@0..30
-  Func@0..30
-    Func@0..4 "func"
-    Whitespace@4..5 " "
-    Name@5..9
-      Identifier@5..9 "main"
-    ParamList@9..11
-      LeftParen@9..10 "("
-      RightParen@10..11 ")"
-    Whitespace@11..12 " "
-    LeftBrace@12..13 "{"
-    Whitespace@13..18 "\n    "
-    ReturnStmt@18..28
-      Return@18..24 "return"
-      Whitespace@24..25 " "
-      UnaryExpr@25..27
-        Bang@25..26 "!"
-        NameRef@26..27
-          Identifier@26..27 "a"
-      Semicolon@27..28 ";"
-    Whitespace@28..29 "\n"
-    RightBrace@29..30 "}"
+SOURCE_FILE@0..30
+  FUNC_KW@0..30
+    FUNC_KW@0..4 "func"
+    WHITESPACE@4..5 " "
+    NAME@5..9
+      IDENT@5..9 "main"
+    PARAM_LIST@9..11
+      L_PAREN@9..10 "("
+      R_PAREN@10..11 ")"
+    WHITESPACE@11..12 " "
+    L_BRACE@12..13 "{"
+    WHITESPACE@13..18 "\n    "
+    RETURN_STMT@18..28
+      RETURN_KW@18..24 "return"
+      WHITESPACE@24..25 " "
+      UNARY_EXPR@25..27
+        BANG@25..26 "!"
+        NAME_REF@26..27
+          IDENT@26..27 "a"
+      SEMICOLON@27..28 ";"
+    WHITESPACE@28..29 "\n"
+    R_BRACE@29..30 "}"

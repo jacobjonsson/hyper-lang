@@ -1,25 +1,25 @@
-SourceFile@0..34
-  View@0..34
-    View@0..4 "view"
-    Whitespace@4..5 " "
-    Name@5..8
-      Identifier@5..8 "app"
-    ParamList@8..10
-      LeftParen@8..9 "("
-      RightParen@9..10 ")"
-    Whitespace@10..11 " "
-    LeftBrace@11..12 "{"
-    Whitespace@12..17 "\n    "
-    ReturnStmt@17..32
-      Return@17..23 "return"
-      Whitespace@23..24 " "
-      XmlElement@24..31
-        LessThan@24..25 "<"
-        NameRef@25..28
-          Identifier@25..28 "div"
-        Whitespace@28..29 " "
-        XmlAttributeList@29..29
-        SlashGreaterThan@29..31 "/>"
-      Semicolon@31..32 ";"
-    Whitespace@32..33 "\n"
-    RightBrace@33..34 "}"
+SOURCE_FILE@0..34
+  VIEW_KW@0..34
+    VIEW_KW@0..4 "view"
+    WHITESPACE@4..5 " "
+    NAME@5..8
+      IDENT@5..8 "app"
+    PARAM_LIST@8..10
+      L_PAREN@8..9 "("
+      R_PAREN@9..10 ")"
+    WHITESPACE@10..11 " "
+    L_BRACE@11..12 "{"
+    WHITESPACE@12..17 "\n    "
+    RETURN_KW@17..32
+      RETURN_KW@17..23 "return"
+      WHITESPACE@23..24 " "
+      XML_ELEMENT@24..31
+        L_ANGLE@24..25 "<"
+        NAME_REF@25..28
+          IDENT@25..28 "div"
+        WHITESPACE@28..29 " "
+        XML_ATTRIBUTE_LIST@29..29
+        SLASH_R_ANGLE@29..31 "/>"
+      SEMICOLON@31..32 ";"
+    WHITESPACE@32..33 "\n"
+    R_BRACE@33..34 "}"

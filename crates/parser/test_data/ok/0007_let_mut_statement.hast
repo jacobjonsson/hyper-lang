@@ -1,27 +1,27 @@
-SourceFile@0..38
-  Func@0..38
-    Func@0..4 "func"
-    Whitespace@4..5 " "
-    Name@5..9
-      Identifier@5..9 "main"
-    ParamList@9..11
-      LeftParen@9..10 "("
-      RightParen@10..11 ")"
-    Whitespace@11..12 " "
-    LeftBrace@12..13 "{"
-    Whitespace@13..18 "\n    "
-    LetStmt@18..36
-      Let@18..21 "let"
-      Whitespace@21..22 " "
-      Mut@22..25 "mut"
-      Whitespace@25..26 " "
-      Name@26..27
-        Identifier@26..27 "a"
-      Whitespace@27..28 " "
-      Equals@28..29 "="
-      Whitespace@29..30 " "
-      Literal@30..35
-        String@30..35 "\"abc\""
-      Semicolon@35..36 ";"
-    Whitespace@36..37 "\n"
-    RightBrace@37..38 "}"
+SOURCE_FILE@0..38
+  FUNC_KW@0..38
+    FUNC_KW@0..4 "func"
+    WHITESPACE@4..5 " "
+    NAME@5..9
+      IDENT@5..9 "main"
+    PARAM_LIST@9..11
+      L_PAREN@9..10 "("
+      R_PAREN@10..11 ")"
+    WHITESPACE@11..12 " "
+    L_BRACE@12..13 "{"
+    WHITESPACE@13..18 "\n    "
+    LET_STMT@18..36
+      LET_KW@18..21 "let"
+      WHITESPACE@21..22 " "
+      MUT_KW@22..25 "mut"
+      WHITESPACE@25..26 " "
+      NAME@26..27
+        IDENT@26..27 "a"
+      WHITESPACE@27..28 " "
+      EQ@28..29 "="
+      WHITESPACE@29..30 " "
+      LITERAL@30..35
+        STRING@30..35 "\"abc\""
+      SEMICOLON@35..36 ";"
+    WHITESPACE@36..37 "\n"
+    R_BRACE@37..38 "}"

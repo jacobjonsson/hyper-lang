@@ -1,62 +1,62 @@
-SourceFile@0..133
-  View@0..94
-    View@0..4 "view"
-    Whitespace@4..5 " "
-    Name@5..11
-      Identifier@5..11 "Button"
-    ParamList@11..13
-      LeftParen@11..12 "("
-      RightParen@12..13 ")"
-    Whitespace@13..14 " "
-    LeftBrace@14..15 "{"
-    Whitespace@15..20 "\n    "
-    ReturnStmt@20..92
-      Return@20..26 "return"
-      Whitespace@26..27 " "
-      LeftParen@27..28 "("
-      Whitespace@28..37 "\n        "
-      XmlElement@37..85
-        LessThan@37..38 "<"
-        NameRef@38..44
-          Identifier@38..44 "button"
-        XmlAttributeList@44..44
-        GreaterThan@44..45 ">"
-        Whitespace@45..58 "\n            "
-        Identifier@58..60 "my"
-        Whitespace@60..61 " "
-        Identifier@61..67 "button"
-        Whitespace@67..76 "\n        "
-        LessThanSlash@76..78 "</"
-        NameRef@78..84
-          Identifier@78..84 "button"
-        GreaterThan@84..85 ">"
-      Whitespace@85..90 "\n    "
-      RightParen@90..91 ")"
-      Semicolon@91..92 ";"
-    Whitespace@92..93 "\n"
-    RightBrace@93..94 "}"
-  Whitespace@94..96 "\n\n"
-  View@96..133
-    View@96..100 "view"
-    Whitespace@100..101 " "
-    Name@101..104
-      Identifier@101..104 "App"
-    ParamList@104..106
-      LeftParen@104..105 "("
-      RightParen@105..106 ")"
-    Whitespace@106..107 " "
-    LeftBrace@107..108 "{"
-    Whitespace@108..113 "\n    "
-    ReturnStmt@113..131
-      Return@113..119 "return"
-      Whitespace@119..120 " "
-      XmlElement@120..130
-        LessThan@120..121 "<"
-        NameRef@121..127
-          Identifier@121..127 "Button"
-        Whitespace@127..128 " "
-        XmlAttributeList@128..128
-        SlashGreaterThan@128..130 "/>"
-      Semicolon@130..131 ";"
-    Whitespace@131..132 "\n"
-    RightBrace@132..133 "}"
+SOURCE_FILE@0..133
+  VIEW_KW@0..94
+    VIEW_KW@0..4 "view"
+    WHITESPACE@4..5 " "
+    NAME@5..11
+      IDENT@5..11 "Button"
+    PARAM_LIST@11..13
+      L_PAREN@11..12 "("
+      R_PAREN@12..13 ")"
+    WHITESPACE@13..14 " "
+    L_BRACE@14..15 "{"
+    WHITESPACE@15..20 "\n    "
+    RETURN_KW@20..92
+      RETURN_KW@20..26 "return"
+      WHITESPACE@26..27 " "
+      L_PAREN@27..28 "("
+      WHITESPACE@28..37 "\n        "
+      XML_ELEMENT@37..85
+        L_ANGLE@37..38 "<"
+        NAME_REF@38..44
+          IDENT@38..44 "button"
+        XML_ATTRIBUTE_LIST@44..44
+        R_ANGLE@44..45 ">"
+        WHITESPACE@45..58 "\n            "
+        IDENT@58..60 "my"
+        WHITESPACE@60..61 " "
+        IDENT@61..67 "button"
+        WHITESPACE@67..76 "\n        "
+        L_ANGLE_SLASH@76..78 "</"
+        NAME_REF@78..84
+          IDENT@78..84 "button"
+        R_ANGLE@84..85 ">"
+      WHITESPACE@85..90 "\n    "
+      R_PAREN@90..91 ")"
+      SEMICOLON@91..92 ";"
+    WHITESPACE@92..93 "\n"
+    R_BRACE@93..94 "}"
+  WHITESPACE@94..96 "\n\n"
+  VIEW_KW@96..133
+    VIEW_KW@96..100 "view"
+    WHITESPACE@100..101 " "
+    NAME@101..104
+      IDENT@101..104 "App"
+    PARAM_LIST@104..106
+      L_PAREN@104..105 "("
+      R_PAREN@105..106 ")"
+    WHITESPACE@106..107 " "
+    L_BRACE@107..108 "{"
+    WHITESPACE@108..113 "\n    "
+    RETURN_KW@113..131
+      RETURN_KW@113..119 "return"
+      WHITESPACE@119..120 " "
+      XML_ELEMENT@120..130
+        L_ANGLE@120..121 "<"
+        NAME_REF@121..127
+          IDENT@121..127 "Button"
+        WHITESPACE@127..128 " "
+        XML_ATTRIBUTE_LIST@128..128
+        SLASH_R_ANGLE@128..130 "/>"
+      SEMICOLON@130..131 ";"
+    WHITESPACE@131..132 "\n"
+    R_BRACE@132..133 "}"

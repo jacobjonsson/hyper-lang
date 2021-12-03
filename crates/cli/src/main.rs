@@ -1,4 +1,3 @@
-use ast::{AstNode, XmlElement};
 use parser::parse;
 use std::{
     io::{stdin, stdout, Write},
@@ -23,13 +22,5 @@ fn main() {
         }
 
         println!("Parsed successfully");
-
-        for node in parse.unwrap().descendants() {
-            if XmlElement::can_cast(node.kind()) {
-                let element = XmlElement::cast(node).unwrap();
-
-                println!("{:?}", element.name_ref().unwrap().syntax().text());
-            }
-        }
     }
 }

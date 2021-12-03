@@ -3,45 +3,46 @@ use super::name;
 use crate::parser::Marker;
 use crate::parser::Parser;
 use syntax::SyntaxKind;
+use syntax::T;
 
 pub(super) fn let_stmt(parser: &mut Parser, marker: Marker) {
-    parser.bump(SyntaxKind::Let);
+    parser.bump(SyntaxKind::LET_KW);
 
-    if parser.at(SyntaxKind::Mut) {
-        parser.bump(SyntaxKind::Mut);
+    if parser.at(SyntaxKind::MUT_KW) {
+        parser.bump(SyntaxKind::MUT_KW);
     }
 
     name(parser);
 
-    if parser.at(SyntaxKind::Semicolon) {
-        parser.bump(SyntaxKind::Semicolon);
-        marker.complete(parser, SyntaxKind::LetStmt);
+    if parser.at(T![;]) {
+        parser.bump(T![;]);
+        marker.complete(parser, SyntaxKind::LET_STMT);
         return;
     }
 
-    parser.expect(SyntaxKind::Equals);
+    parser.expect(T![=]);
 
     expr(parser);
 
-    if parser.at(SyntaxKind::Semicolon) {
-        parser.bump(SyntaxKind::Semicolon);
+    if parser.at(T![;]) {
+        parser.bump(T![;]);
     }
 
-    marker.complete(parser, SyntaxKind::LetStmt);
+    marker.complete(parser, SyntaxKind::LET_STMT);
 }
 
 pub(super) fn state_stmt(parser: &mut Parser, marker: Marker) {
-    parser.bump(SyntaxKind::State);
+    parser.bump(SyntaxKind::STATE_KW);
 
     name(parser);
 
-    parser.expect(SyntaxKind::Equals);
+    parser.expect(T![=]);
 
     expr(parser);
 
-    if parser.at(SyntaxKind::Semicolon) {
-        parser.bump(SyntaxKind::Semicolon);
+    if parser.at(T![;]) {
+        parser.bump(T![;]);
     }
 
-    marker.complete(parser, SyntaxKind::StateStmt);
+    marker.complete(parser, SyntaxKind::STATE_STMT);
 }

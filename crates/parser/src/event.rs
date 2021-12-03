@@ -13,7 +13,7 @@ pub(crate) enum Event {
 
 impl Event {
     pub(crate) fn tombstone() -> Self {
-        Event::Start { kind: SyntaxKind::Tombstone, forward_parent: None }
+        Event::Start { kind: SyntaxKind::TOMBSTONE, forward_parent: None }
     }
 }
 
@@ -46,7 +46,7 @@ pub(super) fn process(sink: &mut TreeSink, mut events: Vec<Event>) {
                 }
 
                 for kind in forward_parents.drain(..).rev() {
-                    if kind != SyntaxKind::Tombstone {
+                    if kind != SyntaxKind::TOMBSTONE {
                         sink.start_node(kind);
                     }
                 }
