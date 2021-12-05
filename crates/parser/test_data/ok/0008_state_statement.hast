@@ -1,5 +1,5 @@
 SOURCE_FILE@0..33
-  VIEW_KW@0..33
+  VIEW@0..33
     VIEW_KW@0..4 "view"
     WHITESPACE@4..5 " "
     NAME@5..8

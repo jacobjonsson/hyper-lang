@@ -2,23 +2,17 @@ use super::{
     expr::{expr, literal},
     name_ref,
 };
-use crate::parser::Parser;
+use crate::{parser::Parser, Parse};
 use syntax::{SyntaxKind, T};
 
 pub(super) fn xml_element(parser: &mut Parser) {
     let marker = parser.start();
-    parser.expect(T![<]);
-    let tag_name = parser.text().unwrap_or("");
-    name_ref(parser);
-    xml_attribute_list(parser);
 
-    if parser.at(T![/>]) {
-        parser.bump(T![/>]);
+    let (tag_name, self_closing) = xml_opening_element(parser);
+    if self_closing {
         marker.complete(parser, SyntaxKind::XML_ELEMENT);
         return;
     }
-
-    parser.expect(T![>]);
 
     loop {
         if parser.at(SyntaxKind::EOF) {
@@ -34,8 +28,8 @@ pub(super) fn xml_element(parser: &mut Parser) {
         // Closing tag
         if parser.at(T![</]) {
             parser.bump(T![</]);
-            if !parser.text_matches(tag_name) {
-                parser.error(format!("expected closing tag to match {}", tag_name));
+            if !parser.text_matches(tag_name.unwrap_or("")) {
+                parser.error(format!("expected closing tag to match {}", tag_name.unwrap_or("")));
             }
             name_ref(parser);
             parser.expect(T![>]);
@@ -52,6 +46,25 @@ pub(super) fn xml_element(parser: &mut Parser) {
         // Anything is valid html text
         parser.bump_any();
     }
+}
+
+fn xml_opening_element<'a>(parser: &'a mut Parser) -> (Option<&'a str>, bool) {
+    let marker = parser.start();
+
+    parser.expect(T![<]);
+    let tag_name = parser.text();
+    name_ref(parser);
+    xml_attribute_list(parser);
+
+    if parser.at(T![/>]) {
+        parser.bump(T![/>]);
+        marker.complete(parser, SyntaxKind::XML_SELF_CLOSING_ELEMENT);
+        return (Some(""), true);
+    }
+
+    parser.expect(T![>]);
+    marker.complete(parser, SyntaxKind::XML_OPENING_ELEMENT);
+    (tag_name, false)
 }
 
 fn xml_attribute_list(parser: &mut Parser) {

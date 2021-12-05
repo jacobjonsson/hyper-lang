@@ -21,7 +21,7 @@ pub(super) fn func(parser: &mut Parser, marker: Marker) {
         parser.error("expected function body");
     }
 
-    marker.complete(parser, SyntaxKind::FUNC_KW);
+    marker.complete(parser, SyntaxKind::FUNC);
 }
 
 fn func_body(parser: &mut Parser) {

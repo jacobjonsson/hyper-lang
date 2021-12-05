@@ -1,5 +1,5 @@
 SOURCE_FILE@0..133
-  VIEW_KW@0..94
+  VIEW@0..94
     VIEW_KW@0..4 "view"
     WHITESPACE@4..5 " "
     NAME@5..11
@@ -36,7 +36,7 @@ SOURCE_FILE@0..133
     WHITESPACE@92..93 "\n"
     R_BRACE@93..94 "}"
   WHITESPACE@94..96 "\n\n"
-  VIEW_KW@96..133
+  VIEW@96..133
     VIEW_KW@96..100 "view"
     WHITESPACE@100..101 " "
     NAME@101..104

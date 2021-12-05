@@ -1,8 +1,7 @@
+use ast::{AstNode, View};
 use parser::parse;
-use std::{
-    io::{stdin, stdout, Write},
-    process::exit,
-};
+use std::io::{stdin, stdout, Write};
+use std::process::exit;
 
 fn main() {
     loop {
@@ -19,6 +18,12 @@ fn main() {
             print!("Failed to parse.:");
             println!("{:?}", parse.unwrap_err());
             exit(-1);
+        }
+
+        for node in parse.unwrap().descendants() {
+            if View::can_cast(node.kind()) {
+                println!("{:?}", View::cast(node));
+            }
         }
 
         println!("Parsed successfully");

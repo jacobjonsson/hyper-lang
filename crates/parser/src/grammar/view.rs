@@ -22,7 +22,7 @@ pub(super) fn view(parser: &mut Parser, marker: Marker) {
         parser.error("expected view body");
     }
 
-    marker.complete(parser, SyntaxKind::VIEW_KW);
+    marker.complete(parser, SyntaxKind::VIEW);
 }
 
 fn view_body(parser: &mut Parser) {

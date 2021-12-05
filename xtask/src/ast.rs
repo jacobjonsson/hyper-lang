@@ -154,6 +154,10 @@ pub(crate) const AST_SRC: AstSrc<'static> = AstSrc {
     tokens: &["Whitespace", "Comment", "String"],
 
     nodes: &ast_nodes! {
+        struct SourceFile {
+            items: [Item],
+        }
+
         struct LetStmt {
             T![let],
             T![mut],
@@ -268,6 +272,11 @@ pub(crate) const AST_SRC: AstSrc<'static> = AstSrc {
     },
 
     enums: &ast_enums! {
+        enum Item {
+            Func,
+            View
+        }
+
         enum Pattern {
             IdentPattern
         }

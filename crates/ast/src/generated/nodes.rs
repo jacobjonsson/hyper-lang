@@ -4,6 +4,16 @@ use crate::*;
 use syntax::{SyntaxKind::*, T};
 #[doc = ""]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub struct SourceFile {
+    pub(crate) syntax: SyntaxNode,
+}
+impl SourceFile {
+    pub fn items(&self) -> AstChildren<Item> {
+        support::children(&self.syntax)
+    }
+}
+#[doc = ""]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct LetStmt {
     pub(crate) syntax: SyntaxNode,
 }
@@ -290,6 +300,12 @@ impl XmlAttribute {
 }
 #[doc = ""]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub enum Item {
+    Func(Func),
+    View(View),
+}
+#[doc = ""]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum Pattern {
     IdentPattern(IdentPattern),
 }
@@ -315,6 +331,21 @@ pub enum ViewStmt {
     LetStmt(LetStmt),
     StateStmt(StateStmt),
     ViewReturnStmt(ViewReturnStmt),
+}
+impl AstNode for SourceFile {
+    fn can_cast(kind: SyntaxKind) -> bool {
+        kind == SOURCE_FILE
+    }
+    fn cast(syntax: SyntaxNode) -> Option<Self> {
+        if Self::can_cast(syntax.kind()) {
+            Some(Self { syntax })
+        } else {
+            None
+        }
+    }
+    fn syntax(&self) -> &SyntaxNode {
+        &self.syntax
+    }
 }
 impl AstNode for LetStmt {
     fn can_cast(kind: SyntaxKind) -> bool {
@@ -601,6 +632,35 @@ impl AstNode for XmlAttribute {
         &self.syntax
     }
 }
+impl From<Func> for Item {
+    fn from(node: Func) -> Item {
+        Item::Func(node)
+    }
+}
+impl From<View> for Item {
+    fn from(node: View) -> Item {
+        Item::View(node)
+    }
+}
+impl AstNode for Item {
+    fn can_cast(kind: SyntaxKind) -> bool {
+        matches!(kind, FUNC | VIEW)
+    }
+    fn cast(syntax: SyntaxNode) -> Option<Self> {
+        let res = match syntax.kind() {
+            FUNC => Item::Func(Func { syntax }),
+            VIEW => Item::View(View { syntax }),
+            _ => return None,
+        };
+        Some(res)
+    }
+    fn syntax(&self) -> &SyntaxNode {
+        match self {
+            Item::Func(it) => &it.syntax,
+            Item::View(it) => &it.syntax,
+        }
+    }
+}
 impl From<IdentPattern> for Pattern {
     fn from(node: IdentPattern) -> Pattern {
         Pattern::IdentPattern(node)
@@ -732,6 +792,11 @@ impl AstNode for ViewStmt {
         }
     }
 }
+impl std::fmt::Display for Item {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        std::fmt::Display::fmt(self.syntax(), f)
+    }
+}
 impl std::fmt::Display for Pattern {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         std::fmt::Display::fmt(self.syntax(), f)
@@ -753,6 +818,11 @@ impl std::fmt::Display for XmlOpeningElementKind {
     }
 }
 impl std::fmt::Display for ViewStmt {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        std::fmt::Display::fmt(self.syntax(), f)
+    }
+}
+impl std::fmt::Display for SourceFile {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         std::fmt::Display::fmt(self.syntax(), f)
     }

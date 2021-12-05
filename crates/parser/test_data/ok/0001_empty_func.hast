@@ -1,5 +1,5 @@
 SOURCE_FILE@0..14
-  FUNC_KW@0..14
+  FUNC@0..14
     FUNC_KW@0..4 "func"
     WHITESPACE@4..5 " "
     NAME@5..9
